@@ -1,0 +1,5 @@
+build-Life-Desktop-Debug/**
+Life/Life.pro
+Life/Life.pro.user
+Life/*.png
+Life/qtquick2applicationviewer/**
