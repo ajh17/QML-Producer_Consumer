@@ -7,7 +7,13 @@
 LIFE_H	life.h	/^#define LIFE_H$/;"	d
 Life	life.cpp	/^Life::Life(QObject *parent) :$/;"	f	class:Life
 Life	life.h	/^class Life : public QObject$/;"	c
+PRODUCER_H	producer.h	/^#define PRODUCER_H$/;"	d
+Producer	producer.cpp	/^Producer::Producer(QObject *parent, QObject* obj) : QObject(parent)$/;"	f	class:Producer
+Producer	producer.h	/^class Producer : public QObject$/;"	c
 backgroundColor	life.cpp	/^QColor Life::backgroundColor() const$/;"	f	class:Life
 m_color	life.h	/^    QColor m_color;$/;"	m	class:Life
+m_obj	producer.h	/^    QObject* m_obj;$/;"	m	class:Producer
 main	main.cpp	/^int main(int argc, char *argv[])$/;"	f
+produceTimer	producer.cpp	/^void Producer::produceTimer() const$/;"	f	class:Producer
 setBackgroundColor	life.cpp	/^void Life::setBackgroundColor(const QColor &c)$/;"	f	class:Life
+timer	producer.h	/^    QTimer *timer;$/;"	m	class:Producer
