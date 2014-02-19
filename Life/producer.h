@@ -1,18 +1,17 @@
 #ifndef PRODUCER_H
 #define PRODUCER_H
-
-#include <QObject>
+#include <QTimer>
 
 class Producer : public QObject
 {
     Q_OBJECT
 public:
     explicit Producer(QObject *parent = 0);
-
-signals:
+    QTimer *timer;
 
 public slots:
+    void produce();
 
 };
 
-#endif // PRODUCER_H
+#endif
