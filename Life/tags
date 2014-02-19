@@ -1,0 +1,13 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+LIFE_H	life.h	/^#define LIFE_H$/;"	d
+Life	life.cpp	/^Life::Life(QObject *parent) :$/;"	f	class:Life
+Life	life.h	/^class Life : public QObject$/;"	c
+backgroundColor	life.cpp	/^QColor Life::backgroundColor() const$/;"	f	class:Life
+m_color	life.h	/^    QColor m_color;$/;"	m	class:Life
+main	main.cpp	/^int main(int argc, char *argv[])$/;"	f
+setBackgroundColor	life.cpp	/^void Life::setBackgroundColor(const QColor &c)$/;"	f	class:Life
