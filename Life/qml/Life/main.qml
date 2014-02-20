@@ -7,4 +7,8 @@ Rectangle {
         Script.createBox();
         return 0;
     }
+    function destroyBox() {
+        Script.destroyRect();
+        return 0;
+    }
 }

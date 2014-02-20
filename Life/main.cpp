@@ -3,6 +3,7 @@
 #include "qtquick2applicationviewer.h"
 #include "life.h"
 #include "producer.h"
+#include "consumer.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +15,7 @@ int main(int argc, char *argv[])
 
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     Producer producer(viewer.rootObject());
+    viewer.rootContext()->setContextProperty("consumer", new Consumer(viewer.rootObject()));
     viewer.setTitle("Life");
     viewer.setHeight(500);
     viewer.setWidth(500);

@@ -30,7 +30,8 @@ function finishCreation() {
     }
 }
 
-function destroy(itemID) {
+function destroyRect() {
+    var itemID = "rectID";
     console.log("Destroying box at (" + itemID.x + ", " + itemID.y + ")");
     itemID.destroy();
 }

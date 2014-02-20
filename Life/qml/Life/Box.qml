@@ -10,6 +10,6 @@ Rectangle {
     border.width: 1
     MouseArea {
         anchors.fill: parent
-        onClicked: Script.destroy(rectID)
+        onClicked: consumer.consumeBox()
     }
 }
