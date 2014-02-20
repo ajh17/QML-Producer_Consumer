@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
     QQuickView viewer;
     Life life;
     QVariant returnVal;
-    QVariant message = "Hello from C++";
 
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     Producer producer(viewer.rootObject());
