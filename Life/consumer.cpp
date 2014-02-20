@@ -16,14 +16,3 @@ void Consumer::consumeBox() {
                 Q_RETURN_ARG(QVariant, returnVal));
     }
 }
-
-
-// TESTING CODE
-/* if (m_obj) { */
-/*     QObject* box = m_obj->findChild<QObject*>("box"); */
-/*     box->setProperty("color", "red"); */
-/*     qDebug() << "Destroying box"; */
-/* } */
-/* else { */
-/*     qDebug() << "Object was null"; */
-/* } */
