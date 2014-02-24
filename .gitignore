@@ -3,3 +3,5 @@ Life/Life.pro.user
 Life/*.png
 Life/qtquick2applicationviewer/**
 Life/tags
+Life/Life.app
+Life/moc_*
