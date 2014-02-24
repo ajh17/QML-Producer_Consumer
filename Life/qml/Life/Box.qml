@@ -10,6 +10,6 @@ Rectangle {
     border.width: 1
     MouseArea {
         anchors.fill: parent
-        onClicked: consumer.consumeBox()
+        onClicked: _consumer.consumeBox()
     }
 }
