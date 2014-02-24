@@ -2,3 +2,4 @@ build-Life-Desktop-Debug/**
 Life/Life.pro.user
 Life/*.png
 Life/qtquick2applicationviewer/**
+Life/tags
