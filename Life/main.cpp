@@ -13,7 +13,9 @@ int main(int argc, char *argv[])
     QVariant returnVal;
 
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
-    Producer producer(viewer.rootObject());
+    QObject *rootObject = viewer.rootObject();
+    Producer* produce = new Producer(rootObject);
+    Consumer* consume = new Consumer(rootObject);
     viewer.rootContext()->setContextProperty("consumer", new Consumer(viewer.rootObject()));
     viewer.setTitle("Life");
     viewer.setHeight(500);
