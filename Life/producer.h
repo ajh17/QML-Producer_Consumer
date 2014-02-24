@@ -17,6 +17,6 @@ public slots:
     QVariant getHash(int id) const;
 private:
     QObject* m_obj;
-    static int id;
+    int id;
 };
 #endif
