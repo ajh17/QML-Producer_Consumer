@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QVariant>
 #include <QMetaObject>
+#include <malloc/malloc.h>
 
 Producer::Producer(QObject* obj, QObject *parent) : QObject(parent)
 {
@@ -17,14 +18,17 @@ void Producer::produceTimer()
 {
     if (!m_obj) {
         qDebug() << "Object was null";
+        exit(1);
     }
-    QVariant returnVal;
-    QMetaObject::invokeMethod(m_obj, "callCreate", Q_RETURN_ARG(QVariant, returnVal));
-    hash.insert(id, returnVal);
+    bool success = QMetaObject::invokeMethod(m_obj, "callCreate");
+    if (!success) {
+        qDebug() << "Unable to call QML function";
+        exit(2);
+    }
     ++id;
 }
 
-QVariant Producer::getHash(int id) const
+QVariant* Producer::getHash(int id) const
 {
     return hash.value(id);
 }

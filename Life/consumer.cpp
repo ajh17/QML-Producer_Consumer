@@ -1,18 +1,19 @@
 #include "consumer.h"
-#include <QDebug>
 
 Consumer::Consumer(QObject* obj, QObject *parent) : QObject(parent)
 {
     m_obj = obj;
 }
 
-void Consumer::consumeBox() {
-    if (!m_obj) {
-        qDebug() << "Object was null";
+void Consumer::consumeBox(const QVariant &obj)
+{
+    if (m_obj) {
+        QVariant retVal;
+        qDebug() << "Called consume box on" << obj;
+        QMetaObject::invokeMethod(m_obj, "destroyBox", Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, obj));
     }
     else {
-        QVariant returnVal;
-        QMetaObject::invokeMethod(m_obj, "destroyBox",
-                Q_RETURN_ARG(QVariant, returnVal));
+        qDebug() << "Viewer doesn't exist";
     }
 }
+

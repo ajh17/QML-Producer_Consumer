@@ -18,3 +18,8 @@ function createBox() {
         console.log("Error loading the box:", component.errorString());
     }
 }
+
+function destroyItem(itemID) {
+    console.log("Destroying " + itemID);
+    itemID.destroy();
+}

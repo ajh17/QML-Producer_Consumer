@@ -9,7 +9,7 @@ Rectangle {
     function callCreate() {
         return Script.createBox();
     }
-    function destroyBox() {
-        Script.destroyRect();
+    function destroyBox(itemID) {
+        return Script.destroyItem(itemID);
     }
 }
