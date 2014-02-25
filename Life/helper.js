@@ -18,10 +18,3 @@ function createBox() {
         console.log("Error loading the box:", component.errorString());
     }
 }
-
-// FIXME: pass the hash item stored in producer.
-function destroyRect() {
-    var itemID = "rectID";
-    console.log("Destroying box at (" + itemID.x + ", " + itemID.y + ")");
-    itemID.destroy();
-}
