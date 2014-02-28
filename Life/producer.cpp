@@ -2,7 +2,6 @@
 #include <QDebug>
 #include <QVariant>
 #include <QMetaObject>
-#include <malloc/malloc.h>
 
 Producer::Producer(QObject* obj, QObject *parent) : QObject(parent)
 {
