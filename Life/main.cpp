@@ -15,13 +15,14 @@ int main(int argc, char *argv[])
 
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
-    Producer producer(item);
+    Producer* producer = new Producer(item);
     Consumer* consumer = new Consumer(item);
-    QObject::connect(item, SIGNAL(qmlSignal(QVariant)), consumer, SLOT(consumeBox(QVariant)));
+
+    QObject::connect(item, SIGNAL(consumeSignal(QVariant)), consumer, SLOT(consume(QVariant)));
+
     viewer.setTitle("Life");
     viewer.setHeight(500);
     viewer.setWidth(500);
-
     viewer.show();
 
     return app.exec();
