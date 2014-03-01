@@ -12,10 +12,11 @@ class Producer : public QObject
 public:
     explicit Producer(QObject* obj = 0, QObject* parent = 0);
     QTimer *timer;
-    QHash<int, QVariant*> hash;
+    QHash<int, QVariant> hash;
 public slots:
     void produceTimer();
-    QVariant* getHash(int id) const;
+public:
+    int hashSize();
 private:
     QObject* m_obj;
     int id;
