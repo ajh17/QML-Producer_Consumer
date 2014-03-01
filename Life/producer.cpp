@@ -2,10 +2,11 @@
 #include <QDebug>
 #include <QVariant>
 #include <QMetaObject>
+#include <QtGlobal>
 
 Producer::Producer(QObject* obj, QObject *parent) : QObject(parent)
 {
-    id = 0;
+    id = 1;
     timer = new QTimer(this);
     m_obj = obj;
 
@@ -19,15 +20,18 @@ void Producer::produceTimer()
         qDebug() << "Object was null";
         exit(1);
     }
-    bool success = QMetaObject::invokeMethod(m_obj, "callCreate");
+    QVariant boxObject;
+    bool success = QMetaObject::invokeMethod(m_obj, "callCreate",
+            Q_RETURN_ARG(QVariant, boxObject));
     if (!success) {
-        qDebug() << "Unable to call QML function";
+        qDebug() << "Unable to call QML function callCreate";
         exit(2);
     }
-    ++id;
+    hash.insert(id, boxObject);
+    qDebug() << "INSERTED Hash(" << id <<  "," << hash.value(id);
 }
 
-QVariant* Producer::getHash(int id) const
+int Producer::hashSize()
 {
-    return hash.value(id);
+    return hash.size();
 }
