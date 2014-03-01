@@ -12,7 +12,4 @@ Rectangle {
     function destroyBox(itemID) {
         return Script.destroyItem(itemID);
     }
-    function destroyRandom(itemID) {
-        return Script.destroyItem(itemID);
-    }
 }
