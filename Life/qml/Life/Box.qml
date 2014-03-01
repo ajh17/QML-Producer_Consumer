@@ -11,6 +11,6 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: qmlSignal(rectID)
+        // onClicked: consumeSignal(rectID)
     }
 }
