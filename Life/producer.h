@@ -15,8 +15,8 @@ public:
     QHash<int, QVariant> hash;
 public slots:
     void produceTimer();
-public:
     int hashSize();
+    QVariant getItem(int id);
 private:
     QObject* m_obj;
     int id;

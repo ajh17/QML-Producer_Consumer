@@ -2,23 +2,21 @@
 #include <QQmlContext>
 #include <QObject>
 #include "qtquick2applicationviewer.h"
-#include "life.h"
 #include "producer.h"
 #include "consumer.h"
+#include "mainobject.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQuickView viewer;
-    Life life;
     QVariant returnVal;
 
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
-    Producer* producer = new Producer(item);
-    Consumer* consumer = new Consumer(item);
-
-    QObject::connect(item, SIGNAL(consumeSignal(QVariant)), consumer, SLOT(consume(QVariant)));
+    //QObject *object = new Object(item);
+    Producer producer(item);
+    Consumer consumer(item);
 
     viewer.setTitle("Life");
     viewer.setHeight(500);

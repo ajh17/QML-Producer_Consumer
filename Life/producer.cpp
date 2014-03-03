@@ -2,7 +2,6 @@
 #include <QDebug>
 #include <QVariant>
 #include <QMetaObject>
-#include <QtGlobal>
 
 Producer::Producer(QObject* obj, QObject *parent) : QObject(parent)
 {
@@ -29,6 +28,11 @@ void Producer::produceTimer()
     }
     hash.insert(id, boxObject);
     qDebug() << "INSERTED Hash(" << id <<  "," << hash.value(id);
+}
+
+QVariant Producer::getItem(int id)
+{
+    return hash.value(id);
 }
 
 int Producer::hashSize()
