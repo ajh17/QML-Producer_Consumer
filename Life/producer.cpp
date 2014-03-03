@@ -3,11 +3,12 @@
 #include <QVariant>
 #include <QMetaObject>
 
-Producer::Producer(QObject* obj, QObject *parent) : QObject(parent)
+Producer::Producer(QObject* obj, MainObject* main, QObject *parent) : QObject(parent)
 {
     id = 1;
     timer = new QTimer(this);
     m_obj = obj;
+    m_main = main;
 
     connect(timer, SIGNAL(timeout()), this, SLOT(produceTimer()));
     timer->start(1000);

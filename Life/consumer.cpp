@@ -1,9 +1,10 @@
 #include "consumer.h"
 
-Consumer::Consumer(QObject* obj, QObject *parent) : QObject(parent)
+Consumer::Consumer(QObject* obj, MainObject *main, QObject *parent) : QObject(parent)
 {
     timer = new QTimer(this);
     m_obj = obj;
+    m_main = main;
 
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
     timer->start(1000);

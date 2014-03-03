@@ -14,9 +14,9 @@ int main(int argc, char *argv[])
 
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
-    //QObject *object = new Object(item);
-    Producer producer(item);
-    Consumer consumer(item);
+    MainObject *mainObject = new MainObject(item);
+    Producer producer(item, mainObject);
+    Consumer consumer(item, mainObject);
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
