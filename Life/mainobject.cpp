@@ -1,4 +1,5 @@
 #include "mainobject.h"
+#include <QDebug>
 
 MainObject::MainObject(QObject* obj, QObject *parent) : QObject(parent)
 {
@@ -9,7 +10,8 @@ MainObject::MainObject(QObject* obj, QObject *parent) : QObject(parent)
 void MainObject::insertBox(QVariant box)
 {
     boxHash.insert(id, box);
-    id += 1;
+    qDebug() << "INSERTED Hash(" << id <<  "," << this->getBox(id);
+    ++id;
 }
 
 QVariant MainObject::getBox(int id)

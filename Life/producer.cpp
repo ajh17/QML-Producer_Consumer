@@ -5,7 +5,6 @@
 
 Producer::Producer(QObject* obj, MainObject* main, QObject *parent) : QObject(parent)
 {
-    id = 1;
     timer = new QTimer(this);
     m_obj = obj;
     m_main = main;
@@ -17,7 +16,7 @@ Producer::Producer(QObject* obj, MainObject* main, QObject *parent) : QObject(pa
 void Producer::produceTimer()
 {
     if (!m_obj) {
-        qDebug() << "Object was null";
+        qDebug() << "Viewer was null";
         exit(1);
     }
     QVariant boxObject;
@@ -27,16 +26,5 @@ void Producer::produceTimer()
         qDebug() << "Unable to call QML function callCreate";
         exit(2);
     }
-    hash.insert(id, boxObject);
-    qDebug() << "INSERTED Hash(" << id <<  "," << hash.value(id);
-}
-
-QVariant Producer::getItem(int id)
-{
-    return hash.value(id);
-}
-
-int Producer::hashSize()
-{
-    return hash.size();
+    m_main->insertBox(boxObject);
 }
