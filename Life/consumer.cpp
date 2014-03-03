@@ -2,10 +2,19 @@
 
 Consumer::Consumer(QObject* obj, QObject *parent) : QObject(parent)
 {
+    timer = new QTimer(this);
     m_obj = obj;
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
+    timer->start(1000);
 }
 
-void Consumer::consumeBox(const QVariant &obj)
+// TODO: Implement this
+void Consumer::startConsuming()
+{
+}
+
+void Consumer::consume(const QVariant &obj)
 {
     if (m_obj) {
         QVariant retVal;
@@ -16,4 +25,3 @@ void Consumer::consumeBox(const QVariant &obj)
         qDebug() << "Viewer doesn't exist";
     }
 }
-
