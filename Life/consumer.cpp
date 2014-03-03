@@ -7,16 +7,14 @@ Consumer::Consumer(QObject* obj, MainObject *main, QObject *parent) : QObject(pa
     m_main = main;
 
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
-    timer->start(1000);
+    timer->start(3000);
 }
 
 void Consumer::startConsuming()
 {
     int hashSize = m_main->hashSize();
-    if (hashSize >= 3) {
-        int randomID = qrand() % hashSize;
-        this->consume(randomID);
-    }
+    int randomID = qrand() % hashSize;
+    this->consume(randomID);
 }
 
 void Consumer::consume(int id)
