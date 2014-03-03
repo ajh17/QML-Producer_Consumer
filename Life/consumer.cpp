@@ -10,17 +10,21 @@ Consumer::Consumer(QObject* obj, MainObject *main, QObject *parent) : QObject(pa
     timer->start(1000);
 }
 
-// TODO: Implement this
 void Consumer::startConsuming()
 {
+    int hashSize = m_main->hashSize();
+    if (hashSize >= 3) {
+        int randomID = qrand() % hashSize;
+        this->consume(randomID);
+    }
 }
 
-void Consumer::consume(const QVariant &obj)
+void Consumer::consume(int id)
 {
     if (m_obj) {
         QVariant retVal;
-        qDebug() << "Called consume box on" << obj;
-        QMetaObject::invokeMethod(m_obj, "destroyBox", Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, obj));
+        QVariant box = m_main->removeBox(id);
+        QMetaObject::invokeMethod(m_obj, "destroyBox", Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, box));
     }
     else {
         qDebug() << "Viewer doesn't exist";

@@ -14,6 +14,16 @@ void MainObject::insertBox(QVariant box)
     ++id;
 }
 
+QVariant MainObject::removeBox(int id)
+{
+    QVariant removedBox = boxHash.value(id);
+    qDebug() << "\nRemoving box " << removedBox << "\n";
+    boxHash.remove(id);
+    --id;
+
+    return removedBox;
+}
+
 QVariant MainObject::getBox(int id)
 {
     return boxHash.value(id);

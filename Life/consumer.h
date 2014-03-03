@@ -16,7 +16,7 @@ public:
     QTimer *timer;
 public slots:
     void startConsuming();
-    void consume(const QVariant &obj);
+    void consume(int id);
 private:
     QObject* m_obj;
     MainObject* m_main;

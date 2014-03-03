@@ -12,6 +12,7 @@ public:
     QHash<int, QVariant> boxHash;
 public slots:
     void insertBox(QVariant box);
+    QVariant removeBox(int id);
     int hashSize();
     QVariant getBox(int id);
 private:
