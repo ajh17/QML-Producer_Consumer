@@ -14,6 +14,13 @@ void Consumer::startConsuming()
 {
     int hashSize = m_main->hashSize();
     int randomID = qrand() % hashSize;
+
+    // Check to make sure the random number ID is in the hash
+    // Otherwise, keep trying to generate random numbers. 
+    // Might be slow.
+    while (! m_main->didFind(randomID)) {
+        randomID = qrand() % hashSize;
+    }
     this->consume(randomID);
 }
 

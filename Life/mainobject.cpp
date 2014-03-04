@@ -33,3 +33,8 @@ int MainObject::hashSize()
 {
     return boxHash.size();
 }
+
+int MainObject::didFind(int id)
+{
+    return boxHash.contains(id);
+}
