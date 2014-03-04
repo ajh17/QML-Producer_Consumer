@@ -15,7 +15,7 @@ public slots:
     QVariant removeBox(int id);
     int hashSize();
     QVariant getBox(int id);
-    int didFind(int id);
+    bool didFind(int id);
 private:
     QObject *m_obj;
     int id;
