@@ -10,14 +10,14 @@ MainObject::MainObject(QObject* obj, QObject *parent) : QObject(parent)
 void MainObject::insertBox(QVariant box)
 {
     boxHash.insert(id, box);
-    qDebug() << "INSERTED Hash(" << id <<  "," << this->getBox(id);
+    qDebug() << "\n+++>> INSERTED Hash(" << id <<  "," << this->getBox(id) << "\n";
     ++id;
 }
 
 QVariant MainObject::removeBox(int id)
 {
     QVariant removedBox = boxHash.value(id);
-    qDebug() << "REMOVED Hash( " << id << "," << removedBox << ")";
+    qDebug() << "\n<<--- REMOVED Hash(" << id << "," << removedBox << "\n";
     boxHash.remove(id);
     --id;
 
