@@ -6,7 +6,6 @@
 #include "producer.h"
 #include "consumer.h"
 #include "mainobject.h"
-#include "worker.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,15 +15,12 @@ int main(int argc, char *argv[])
 
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
+    MainObject *mainObject = new MainObject(item);
     QObject::connect((QObject*)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
 
-
-    MainObject *mainObject = new MainObject(item);
-    Worker thread;
-
     // Start producer's thread
-    Producer *producer = new Producer(item, mainObject);
     qDebug() << "GUI thread reporting in! " << app.thread()->currentThreadId();
+    Producer *producer = new Producer(item, mainObject);
 
     Consumer consumer(item, mainObject);
 

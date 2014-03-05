@@ -10,8 +10,7 @@ QML_IMPORT_PATH =
 SOURCES += main.cpp \
     producer.cpp \
     consumer.cpp \
-    mainobject.cpp \
-    worker.cpp
+    mainobject.cpp
 
 # Installation path
 # target.path =
@@ -23,8 +22,7 @@ qtcAddDeployment()
 HEADERS += \
     producer.h \
     consumer.h \
-    mainobject.h \
-    worker.h
+    mainobject.h
 
 OTHER_FILES += \
     helper.js
