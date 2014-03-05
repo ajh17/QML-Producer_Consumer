@@ -20,6 +20,7 @@ public slots:
 private:
     QObject* m_obj;
     MainObject* m_main;
+    QMutex mutex;
 };
 
 #endif

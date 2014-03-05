@@ -31,7 +31,6 @@ void Consumer::consume(int id)
     if (m_obj) {
         qDebug() << "Consumer Thread ID: " << thread()->currentThreadId();
         QVariant retVal;
-        QMutex mutex;
 
         mutex.lock();
         QVariant box = m_main->removeBox(id);
