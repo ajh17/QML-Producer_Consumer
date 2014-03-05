@@ -1,8 +1,8 @@
 function createBox() {
     "use strict";
     var component = Qt.createComponent("qml/Life/Box.qml"),
-    xVal = Math.floor((Math.random() * 500) + 1),
-    yVal = Math.floor((Math.random() * 500) + 1), box;
+    xVal = Math.floor((Math.random() * 420) + 1),
+    yVal = Math.floor((Math.random() * 420) + 1), box;
 
     if (component.status === Component.Ready) {
         box = component.createObject(appWindow, { "x": xVal, "y": yVal });
