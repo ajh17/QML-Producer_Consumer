@@ -11,6 +11,5 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        // onClicked: consumeSignal(rectID)
     }
 }

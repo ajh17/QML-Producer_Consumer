@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
+    QObject::connect((QObject*)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
     MainObject *mainObject = new MainObject(item);
     Producer producer(item, mainObject);
     Consumer consumer(item, mainObject);
