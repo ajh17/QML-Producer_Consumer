@@ -1,8 +1,8 @@
 #ifndef MAINOBJECT_H
 #define MAINOBJECT_H
 #include <QObject>
+#include <QDebug>
 #include <QVariant>
-#include <QHash>
 
 class MainObject : public QObject
 {

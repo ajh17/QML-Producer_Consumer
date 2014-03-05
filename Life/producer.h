@@ -1,10 +1,7 @@
 #ifndef PRODUCER_H
 #define PRODUCER_H
 #include <QTimer>
-#include <QHash>
-#include <QVariant>
 #include <QQuickItem>
-#include "qtquick2applicationviewer.h"
 #include "mainobject.h"
 
 class Producer : public QObject

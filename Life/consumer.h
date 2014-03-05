@@ -2,7 +2,6 @@
 #define CONSUMER_H
 #include <QObject>
 #include <QVariant>
-#include <QDebug>
 #include <QTimer>
 #include <QMutex>
 #include "mainobject.h"

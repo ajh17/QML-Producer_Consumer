@@ -1,6 +1,5 @@
 #include "consumer.h"
 #include <QThread>
-#include <QMutex>
 
 Consumer::Consumer(QObject* obj, MainObject *main, QObject *parent) : QObject(parent)
 {

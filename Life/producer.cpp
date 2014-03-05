@@ -1,7 +1,4 @@
 #include "producer.h"
-#include <QDebug>
-#include <QVariant>
-#include <QMetaObject>
 #include <QThread>
 #include <QMutex>
 
