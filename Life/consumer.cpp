@@ -1,5 +1,6 @@
 #include "consumer.h"
 #include <QThread>
+#include <QMutex>
 
 Consumer::Consumer(QObject* obj, MainObject *main, QObject *parent) : QObject(parent)
 {
@@ -30,8 +31,13 @@ void Consumer::consume(int id)
     if (m_obj) {
         qDebug() << "Consumer Thread ID: " << thread()->currentThreadId();
         QVariant retVal;
+        QMutex mutex;
+
+        mutex.lock();
         QVariant box = m_main->removeBox(id);
-        QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection, Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, box));
+        QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection,
+                Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, box));
+        mutex.unlock();
     }
     else {
         qDebug() << "Viewer doesn't exist";
