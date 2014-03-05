@@ -8,11 +8,7 @@ class Worker : public QObject
     Q_OBJECT
 public:
     explicit Worker(QObject *parent = 0);
-
-signals:
-
-public slots:
-
+private:
+    void run();
 };
-
-#endif // WORKER_H
+#endif
