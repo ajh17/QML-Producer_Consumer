@@ -1,15 +1,16 @@
 function createBox() {
-    var component = Qt.createComponent("qml/Life/Box.qml");
-    var xVal = Math.floor((Math.random() * 500) + 1);
-    var yVal = Math.floor((Math.random() * 500) + 1);
+    "use strict";
+    var component = Qt.createComponent("qml/Life/Box.qml"),
+    xVal = Math.floor((Math.random() * 500) + 1),
+    yVal = Math.floor((Math.random() * 500) + 1), box;
 
     if (component.status === Component.Ready) {
-        var box = component.createObject(appWindow, { "x": xVal, "y": yVal });
+        box = component.createObject(appWindow, { "x": xVal, "y": yVal });
         if (box === null) {
             console.log("Error creating the box");
         }
         else {
-            console.log("Creating " + box + "(" + xVal + ", " + yVal + ")");
+            console.log("Created " + box + "(" + xVal + ", " + yVal + ")");
             return box;
         }
         return 0;
@@ -20,6 +21,6 @@ function createBox() {
 }
 
 function destroyItem(itemID) {
-    console.log("Destroying " + itemID);
+    console.log("Destroyed " + itemID);
     itemID.destroy();
 }
