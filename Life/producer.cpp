@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QVariant>
 #include <QMetaObject>
+#include <QThread>
 
 Producer::Producer(QObject* obj, MainObject* main, QObject *parent) : QObject(parent)
 {
@@ -17,14 +18,13 @@ void Producer::produceTimer()
 {
     if (!m_obj) {
         qDebug() << "Viewer was null";
-        exit(1);
     }
+    qDebug() << "Producer Thread ID: " << thread()->currentThreadId();
     QVariant boxObject;
     bool success = QMetaObject::invokeMethod(m_obj, "callCreate",
-            Q_RETURN_ARG(QVariant, boxObject));
+            Qt::BlockingQueuedConnection, Q_RETURN_ARG(QVariant, boxObject));
     if (!success) {
         qDebug() << "Unable to call QML function callCreate";
-        exit(2);
     }
     m_main->insertBox(boxObject);
 }

@@ -1,4 +1,5 @@
 #include "consumer.h"
+#include <QThread>
 
 Consumer::Consumer(QObject* obj, MainObject *main, QObject *parent) : QObject(parent)
 {
@@ -16,7 +17,7 @@ void Consumer::startConsuming()
     int randomID = qrand() % hashSize;
 
     // Check to make sure the random number ID is in the hash
-    // Otherwise, keep trying to generate random numbers. 
+    // Otherwise, keep trying to generate random numbers.
     // Might be slow.
     while (! m_main->didFind(randomID)) {
         randomID = qrand() % hashSize;
@@ -27,9 +28,10 @@ void Consumer::startConsuming()
 void Consumer::consume(int id)
 {
     if (m_obj) {
+        qDebug() << "Consumer Thread ID: " << thread()->currentThreadId();
         QVariant retVal;
         QVariant box = m_main->removeBox(id);
-        QMetaObject::invokeMethod(m_obj, "destroyBox", Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, box));
+        QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection, Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, box));
     }
     else {
         qDebug() << "Viewer doesn't exist";
