@@ -4,8 +4,7 @@
 #include <QVariant>
 #include <QDebug>
 #include <QTimer>
-#include <QtGlobal>
-#include "producer.h"
+#include <QMutex>
 #include "mainobject.h"
 
 class Consumer : public QObject
