@@ -1,5 +1,4 @@
 #include "producer.h"
-#include <QThread>
 
 Producer::Producer(QObject* obj, MainObject* main, QObject *parent) : QObject(parent)
 {
