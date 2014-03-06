@@ -8,8 +8,4 @@ Rectangle {
     color: "#fff"
     border.color: "#000"
     border.width: 1
-
-    MouseArea {
-        anchors.fill: parent
-    }
 }

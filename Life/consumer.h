@@ -1,6 +1,5 @@
 #ifndef CONSUMER_H
 #define CONSUMER_H
-#include <QObject>
 #include <QTimer>
 #include <QThread>
 #include <QMutex>
