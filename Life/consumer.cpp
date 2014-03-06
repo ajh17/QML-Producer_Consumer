@@ -1,5 +1,4 @@
 #include "consumer.h"
-#include <QThread>
 
 Consumer::Consumer(QObject* obj, MainObject *main, QObject *parent) : QObject(parent)
 {
