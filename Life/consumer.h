@@ -1,11 +1,9 @@
 #ifndef CONSUMER_H
 #define CONSUMER_H
 #include <QObject>
-#include <QVariant>
-#include <QDebug>
 #include <QTimer>
-#include <QtGlobal>
-#include "producer.h"
+#include <QThread>
+#include <QMutex>
 #include "mainobject.h"
 
 class Consumer : public QObject
@@ -20,6 +18,7 @@ public slots:
 private:
     QObject* m_obj;
     MainObject* m_main;
+    QMutex mutex;
 };
 
 #endif

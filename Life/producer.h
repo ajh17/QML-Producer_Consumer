@@ -1,10 +1,9 @@
 #ifndef PRODUCER_H
 #define PRODUCER_H
 #include <QTimer>
-#include <QHash>
-#include <QVariant>
+#include <QThread>
 #include <QQuickItem>
-#include "qtquick2applicationviewer.h"
+#include <QMutex>
 #include "mainobject.h"
 
 class Producer : public QObject
@@ -18,5 +17,6 @@ public slots:
 private:
     QObject* m_obj;
     MainObject* m_main;
+    QMutex mutex;
 };
 #endif

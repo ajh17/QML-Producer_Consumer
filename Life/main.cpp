@@ -1,7 +1,5 @@
 #include <QtGui/QGuiApplication>
 #include <QQmlContext>
-#include <QObject>
-#include <QThread>
 #include "qtquick2applicationviewer.h"
 #include "producer.h"
 #include "consumer.h"
