@@ -2,6 +2,7 @@
 #define PRODUCER_H
 #include <QTimer>
 #include <QQuickItem>
+#include <QMutex>
 #include "mainobject.h"
 
 class Producer : public QObject
@@ -15,5 +16,6 @@ public slots:
 private:
     QObject* m_obj;
     MainObject* m_main;
+    QMutex mutex;
 };
 #endif

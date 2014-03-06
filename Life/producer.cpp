@@ -1,6 +1,5 @@
 #include "producer.h"
 #include <QThread>
-#include <QMutex>
 
 Producer::Producer(QObject* obj, MainObject* main, QObject *parent) : QObject(parent)
 {
@@ -19,9 +18,8 @@ void Producer::produceTimer()
     }
     qDebug() << "Producer Thread ID: " << thread()->currentThreadId();
     QVariant boxObject;
-    QMutex mutex;
+    QMutexLocker locker(&mutex);
 
-    mutex.lock();
     bool success = QMetaObject::invokeMethod(m_obj, "callCreate",
             Qt::BlockingQueuedConnection, Q_RETURN_ARG(QVariant, boxObject));
     if (!success) {
@@ -29,5 +27,4 @@ void Producer::produceTimer()
     }
 
     m_main->insertBox(boxObject);
-    mutex.unlock();
 }
