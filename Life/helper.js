@@ -24,3 +24,14 @@ function destroyItem(itemID) {
     console.log("Destroyed " + itemID);
     itemID.destroy();
 }
+
+function moveBox(itemID) {
+    console.log("Moving box " + itemID);
+    var xVal = Math.floor((Math.random() * 420) + 1);
+    var yVal = Math.floor((Math.random() * 420) + 1);
+
+    itemID.x = xVal;
+    itemID.y = yVal;
+
+    return itemID;
+}
