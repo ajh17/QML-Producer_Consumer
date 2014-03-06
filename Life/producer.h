@@ -1,6 +1,7 @@
 #ifndef PRODUCER_H
 #define PRODUCER_H
 #include <QTimer>
+#include <QThread>
 #include <QQuickItem>
 #include <QMutex>
 #include "mainobject.h"

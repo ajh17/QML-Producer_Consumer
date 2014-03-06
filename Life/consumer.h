@@ -1,8 +1,8 @@
 #ifndef CONSUMER_H
 #define CONSUMER_H
 #include <QObject>
-#include <QVariant>
 #include <QTimer>
+#include <QThread>
 #include <QMutex>
 #include "mainobject.h"
 
