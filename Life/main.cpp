@@ -3,7 +3,7 @@
 #include "qtquick2applicationviewer.h"
 #include "producer.h"
 #include "consumer.h"
-#include "mainobject.h"
+#include "animator.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     // Read QML File
     QQuickView viewer;
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
+
     QObject *item = viewer.rootObject();
     QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
 
@@ -33,6 +34,11 @@ int main(int argc, char *argv[])
     consumer->moveToThread(consumeThread);
     consumeThread->start();
 
+    // Start Animator
+    Animator *animator = new Animator(item, mainObject);
+    QObject::connect(item, SIGNAL(sendBox(QVariant)), animator,
+                     SLOT(storeBox(QVariant)));
+
     viewer.setTitle("Life");
     viewer.setHeight(500);
     viewer.setWidth(500);
@@ -40,4 +46,5 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
 
