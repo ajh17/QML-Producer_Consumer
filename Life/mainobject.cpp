@@ -1,6 +1,6 @@
 #include "mainobject.h"
 
-MainObject::MainObject(QObject* obj, QObject *parent) : QObject(parent)
+MainObject::MainObject(QObject *obj, QObject *parent) : QObject(parent)
 {
     m_obj = obj;
     id = 1;
@@ -11,6 +11,16 @@ void MainObject::insertBox(QVariant box)
     boxHash.insert(id, box);
     qDebug() << "\n+++>> INSERTED Hash(" << id <<  "," << this->getBox(id) << "\n";
     ++id;
+}
+
+void MainObject::updateHash(int id, QVariant box)
+{
+    boxHash.insert(id, box);
+}
+
+int MainObject::getKeyFor(QVariant box)
+{
+    return boxHash.key(box);
 }
 
 QVariant MainObject::removeBox(int id)
@@ -37,3 +47,4 @@ bool MainObject::didFind(int id)
 {
     return boxHash.contains(id);
 }
+

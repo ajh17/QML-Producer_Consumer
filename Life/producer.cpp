@@ -1,6 +1,6 @@
 #include "producer.h"
 
-Producer::Producer(QObject* obj, MainObject* main, QObject *parent) : QObject(parent)
+Producer::Producer(QObject *obj, MainObject *main, QObject *parent) : QObject(parent)
 {
     timer = new QTimer(this);
     m_obj = obj;
@@ -20,10 +20,11 @@ void Producer::produceTimer()
     QMutexLocker locker(&mutex);
 
     bool success = QMetaObject::invokeMethod(m_obj, "callCreate",
-            Qt::BlockingQueuedConnection, Q_RETURN_ARG(QVariant, boxObject));
+                   Qt::BlockingQueuedConnection, Q_RETURN_ARG(QVariant, boxObject));
     if (!success) {
         qDebug() << "Unable to call QML function callCreate";
     }
 
     m_main->insertBox(boxObject);
 }
+

@@ -6,8 +6,12 @@ Rectangle {
 
     signal consumeSignal(var anObject);
 
+    signal sendBox(var anObject);
+
     function callCreate() {
-        return Script.createBox();
+        var box = Script.createBox();
+        appWindow.sendBox(box);
+        return box;
     }
     function destroyBox(itemID) {
         return Script.destroyItem(itemID);
