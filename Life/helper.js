@@ -1,8 +1,8 @@
 function createBox() {
-    "use strict";
-    var component = Qt.createComponent("qml/Life/Box.qml"),
-    xVal = Math.floor((Math.random() * 420) + 1),
-    yVal = Math.floor((Math.random() * 420) + 1), box;
+    var component = Qt.createComponent("qml/Life/Box.qml");
+    var xVal = Math.floor((Math.random() * 420) + 1);
+    var yVal = Math.floor((Math.random() * 420) + 1);
+    var box;
 
     if (component.status === Component.Ready) {
         box = component.createObject(appWindow, { "x": xVal, "y": yVal });
@@ -17,6 +17,7 @@ function createBox() {
     }
     else if (component.status === Component.Error) {
         console.log("Error loading the box:", component.errorString());
+        return 0;
     }
 }
 
