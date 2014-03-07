@@ -7,10 +7,9 @@ Animator::Animator(QObject *obj, MainObject *main, QObject *parent) : QObject(pa
     m_currentBox = 0;
 }
 
-void storeBox(QVariant box)
+void Animator::storeBox(QVariant box)
 {
-    //qDebug() << box;
-    // m_currentBox = box;
+    m_currentBox = box;
 }
 
 void Animator::moveBox()
