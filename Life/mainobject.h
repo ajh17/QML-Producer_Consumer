@@ -8,7 +8,7 @@ class MainObject : public QObject
 {
     Q_OBJECT
 public:
-    explicit MainObject(QObject* obj = 0, QObject *parent = 0);
+    explicit MainObject(QObject *obj = 0, QObject *parent = 0);
     QHash<int, QVariant> boxHash;
 public slots:
     void insertBox(QVariant box);
@@ -21,3 +21,4 @@ private:
     int id;
 };
 #endif
+

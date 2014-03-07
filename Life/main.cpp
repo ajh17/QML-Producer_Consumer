@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QQuickView viewer;
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
-    QObject::connect((QObject*)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
+    QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
 
     // Setup main object.
     MainObject *mainObject = new MainObject(item);
@@ -40,3 +40,4 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
