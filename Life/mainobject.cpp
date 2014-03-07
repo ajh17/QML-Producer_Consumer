@@ -13,6 +13,16 @@ void MainObject::insertBox(QVariant box)
     ++id;
 }
 
+void MainObject::updateHash(int id, QVariant box)
+{
+    boxHash.insert(id, box);
+}
+
+int MainObject::getKeyFor(QVariant box)
+{
+    return boxHash.key(box);
+}
+
 QVariant MainObject::removeBox(int id)
 {
     QVariant removedBox = boxHash.value(id);
