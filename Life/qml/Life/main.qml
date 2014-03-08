@@ -21,6 +21,7 @@ Rectangle {
         Qt.quit();
     }
 
+    // Quit Button {{{
     Rectangle {
         width: 75
         height: 25
@@ -39,3 +40,4 @@ Rectangle {
         }
     }
 }
+/* vim: set fen fdm=marker : */
