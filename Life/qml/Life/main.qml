@@ -8,6 +8,10 @@ Rectangle {
 
     signal sendBox(var anObject);
 
+    function startAnimating(box) {
+        Script.moveBox(box);
+    }
+
     function callCreate() {
         var box = Script.createBox();
         appWindow.sendBox(box);
