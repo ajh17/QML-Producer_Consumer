@@ -15,10 +15,20 @@ Rectangle {
         PropertyAnimation { to: Script.getNewX(); }
         PropertyAnimation { to: Script.getNewX(); }
         PropertyAnimation { to: Script.getNewX(); }
+        PropertyAnimation { to: Script.getNewX(); }
+        PropertyAnimation { to: Script.getNewX(); }
+        PropertyAnimation { to: Script.getNewX(); }
+        PropertyAnimation { to: Script.getNewX(); }
+        PropertyAnimation { to: Script.getNewX(); }
     }
 
     SequentialAnimation on y {
         loops: Animation.Infinite
+        PropertyAnimation { to: Script.getNewY(); }
+        PropertyAnimation { to: Script.getNewY(); }
+        PropertyAnimation { to: Script.getNewY(); }
+        PropertyAnimation { to: Script.getNewY(); }
+        PropertyAnimation { to: Script.getNewY(); }
         PropertyAnimation { to: Script.getNewY(); }
         PropertyAnimation { to: Script.getNewY(); }
         PropertyAnimation { to: Script.getNewY(); }
