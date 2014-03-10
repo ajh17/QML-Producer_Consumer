@@ -11,7 +11,6 @@ Rectangle {
 
     function callCreate() {
         var box = Script.createBox();
-        appWindow.sendBox(box);
         return box;
     }
 
