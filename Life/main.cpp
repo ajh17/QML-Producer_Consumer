@@ -36,8 +36,6 @@ int main(int argc, char *argv[])
 
     // Start Animator
     Animator *animator = new Animator(item, mainObject);
-    QObject::connect(item, SIGNAL(sendBox(QVariant)), animator,
-                     SLOT(storeBox(QVariant)));
 
     viewer.setTitle("Life");
     viewer.setHeight(500);

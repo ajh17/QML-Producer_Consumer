@@ -3,10 +3,7 @@ import "/Users/ajh/Developer/Cpp/QML/Life/Life/helper.js" as Script
 
 Rectangle {
     id: appWindow
-
     signal consumeSignal(var anObject);
-
-    signal sendBox(var anObject);
 
     function startAnimating(box) {
         Script.moveBox(box);
@@ -17,6 +14,7 @@ Rectangle {
         appWindow.sendBox(box);
         return box;
     }
+
     function destroyBox(itemID) {
         return Script.destroyItem(itemID);
     }

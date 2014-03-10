@@ -4,12 +4,6 @@ Animator::Animator(QObject *obj, MainObject *main, QObject *parent) : QObject(pa
 {
     m_obj = obj;
     m_main = main;
-    m_currentBox = 0;
-}
-
-void Animator::storeBox(QVariant box)
-{
-    m_currentBox = box;
 }
 
 void Animator::moveBox()
