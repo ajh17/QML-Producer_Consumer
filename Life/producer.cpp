@@ -20,11 +20,16 @@ void Producer::produceTimer()
     QMutexLocker locker(&mutex);
 
     bool success = QMetaObject::invokeMethod(m_obj, "callCreate",
-                   Qt::BlockingQueuedConnection, Q_RETURN_ARG(QVariant, boxObject));
+                   Qt::BlockingQueuedConnection,
+                   Q_RETURN_ARG(QVariant, boxObject));
+
+    QMetaObject::invokeMethod(m_obj, "startAnimating",
+                              Qt::BlockingQueuedConnection,
+                              Q_RETURN_ARG(QVariant, boxObject),
+                              Q_ARG(QVariant, boxObject));
     if (!success) {
         qDebug() << "Unable to call QML function callCreate";
     }
 
     m_main->insertBox(boxObject);
 }
-

@@ -3,16 +3,18 @@ import "/Users/ajh/Developer/Cpp/QML/Life/Life/helper.js" as Script
 
 Rectangle {
     id: appWindow
-
     signal consumeSignal(var anObject);
 
-    signal sendBox(var anObject);
+    function startAnimating(box) {
+        Script.moveBox(box);
+    }
 
     function callCreate() {
         var box = Script.createBox();
         appWindow.sendBox(box);
         return box;
     }
+
     function destroyBox(itemID) {
         return Script.destroyItem(itemID);
     }
