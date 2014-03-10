@@ -11,27 +11,27 @@ Rectangle {
 
     SequentialAnimation on x {
         loops: Animation.Infinite
-        PropertyAnimation { to: Script.getNewX(); }
-        PropertyAnimation { to: Script.getNewX(); }
-        PropertyAnimation { to: Script.getNewX(); }
-        PropertyAnimation { to: Script.getNewX(); }
-        PropertyAnimation { to: Script.getNewX(); }
-        PropertyAnimation { to: Script.getNewX(); }
-        PropertyAnimation { to: Script.getNewX(); }
-        PropertyAnimation { to: Script.getNewX(); }
-        PropertyAnimation { to: Script.getNewX(); }
+        PropertyAnimation { to: Script.getNewVal(x); }
+        PropertyAnimation { to: Script.getNewVal(x); }
+        PropertyAnimation { to: Script.getNewVal(x); }
+        PropertyAnimation { to: Script.getNewVal(x); }
+        PropertyAnimation { to: Script.getNewVal(x); }
+        PropertyAnimation { to: Script.getNewVal(x); }
+        PropertyAnimation { to: Script.getNewVal(x); }
+        PropertyAnimation { to: Script.getNewVal(x); }
+        PropertyAnimation { to: Script.getNewVal(x); }
     }
 
     SequentialAnimation on y {
         loops: Animation.Infinite
-        PropertyAnimation { to: Script.getNewY(); }
-        PropertyAnimation { to: Script.getNewY(); }
-        PropertyAnimation { to: Script.getNewY(); }
-        PropertyAnimation { to: Script.getNewY(); }
-        PropertyAnimation { to: Script.getNewY(); }
-        PropertyAnimation { to: Script.getNewY(); }
-        PropertyAnimation { to: Script.getNewY(); }
-        PropertyAnimation { to: Script.getNewY(); }
-        PropertyAnimation { to: Script.getNewY(); }
+        PropertyAnimation { to: Script.getNewVal(y); }
+        PropertyAnimation { to: Script.getNewVal(y); }
+        PropertyAnimation { to: Script.getNewVal(y); }
+        PropertyAnimation { to: Script.getNewVal(y); }
+        PropertyAnimation { to: Script.getNewVal(y); }
+        PropertyAnimation { to: Script.getNewVal(y); }
+        PropertyAnimation { to: Script.getNewVal(y); }
+        PropertyAnimation { to: Script.getNewVal(y); }
+        PropertyAnimation { to: Script.getNewVal(y); }
     }
 }

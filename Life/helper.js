@@ -26,10 +26,12 @@ function destroyItem(itemID) {
     itemID.destroy();
 }
 
-function getNewX() {
-    return Math.floor((Math.random() * 420) + 1);
-}
-
-function getNewY() {
-    return Math.floor((Math.random() * 420) + 1);
+function getNewVal(oldVal) {
+    var newVal = Math.floor((Math.random() * 420) + 1);
+    if (newVal === oldVal) {
+        getNewVal(oldVal);
+    }
+    else {
+        return newVal;
+    }
 }
