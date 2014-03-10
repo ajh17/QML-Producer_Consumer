@@ -23,10 +23,6 @@ void Producer::produceTimer()
                    Qt::BlockingQueuedConnection,
                    Q_RETURN_ARG(QVariant, boxObject));
 
-    QMetaObject::invokeMethod(m_obj, "startAnimating",
-                              Qt::BlockingQueuedConnection,
-                              Q_RETURN_ARG(QVariant, boxObject),
-                              Q_ARG(QVariant, boxObject));
     if (!success) {
         qDebug() << "Unable to call QML function callCreate";
     }

@@ -5,10 +5,6 @@ Rectangle {
     id: appWindow
     signal consumeSignal(var anObject);
 
-    function startAnimating(box) {
-        Script.moveBox(box);
-    }
-
     function callCreate() {
         var box = Script.createBox();
         return box;
@@ -40,5 +36,6 @@ Rectangle {
             onClicked: quit()
         }
     }
+    // }}}
 }
 /* vim: set fen fdm=marker : */

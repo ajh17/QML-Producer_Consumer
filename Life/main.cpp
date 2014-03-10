@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     consumeThread->start();
 
     // Start Animator
-    Animator *animator = new Animator(item, mainObject);
+    //Animator *animator = new Animator(item, mainObject);
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
