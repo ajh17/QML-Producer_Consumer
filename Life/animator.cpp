@@ -6,15 +6,8 @@ Animator::Animator(QObject *obj, MainObject *main, QObject *parent) : QObject(pa
     m_main = main;
 }
 
-void Animator::moveBox()
+void Animator::checkForCollision(const QVariant &obj)
 {
-    QVariant box;
-    QVariant movedBox;
-
-    int key = m_main->getKeyFor(box);
-
-    // Update the hash
-    QMetaObject::invokeMethod(m_obj, "moveBox", Q_RETURN_ARG(QVariant, box),
-                              Q_ARG(QVariant, movedBox));
-    m_main->updateHash(key, movedBox);
+    qDebug() << "recieved";
 }
+

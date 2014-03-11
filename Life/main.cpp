@@ -35,7 +35,9 @@ int main(int argc, char *argv[])
     consumeThread->start();
 
     // Start Animator
-    //Animator *animator = new Animator(item, mainObject);
+    Animator *animator = new Animator(item, mainObject);
+    QObject::connect((QObject *)viewer.engine(), SIGNAL(boxMoved(QVariant)),
+                     &app, SLOT(checkForCollision(QVariant)));
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
@@ -44,5 +46,8 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
+
+
 
 
