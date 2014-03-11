@@ -4,14 +4,10 @@ import "/Users/ajh/Developer/Cpp/QML/Life/Life/helper.js" as Script
 Rectangle {
     id: appWindow
     signal consumeSignal(var anObject);
-
-    function startAnimating(box) {
-        Script.moveBox(box);
-    }
+    signal boxMoved(var anObj);
 
     function callCreate() {
         var box = Script.createBox();
-        appWindow.sendBox(box);
         return box;
     }
 
@@ -41,5 +37,6 @@ Rectangle {
             onClicked: quit()
         }
     }
+    // }}}
 }
 /* vim: set fen fdm=marker : */
