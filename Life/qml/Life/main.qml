@@ -4,6 +4,7 @@ import "/Users/ajh/Developer/Cpp/QML/Life/Life/helper.js" as Script
 Rectangle {
     id: appWindow
     signal consumeSignal(var anObject);
+    signal boxMoved(var anObj);
 
     function callCreate() {
         var box = Script.createBox();
