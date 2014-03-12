@@ -23,6 +23,11 @@ int MainObject::getKeyFor(QVariant box)
     return boxHash.key(box);
 }
 
+QList<int> MainObject::getKeys()
+{
+    return boxHash.keys();
+}
+
 QVariant MainObject::removeBox(int id)
 {
     QVariant removedBox = boxHash.value(id);
