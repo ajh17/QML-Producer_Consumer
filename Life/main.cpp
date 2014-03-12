@@ -3,7 +3,7 @@
 #include "qtquick2applicationviewer.h"
 #include "producer.h"
 #include "consumer.h"
-#include "animator.h"
+#include "avoider.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,9 +34,9 @@ int main(int argc, char *argv[])
     consumer->moveToThread(consumeThread);
     consumeThread->start();
 
-    // Start Animator
-    Animator *animator = new Animator(item, consumer, mainObject);
-    animator->checkForCollision();
+    // Start Avoider
+    Avoider *avoider = new Avoider(item, consumer, mainObject);
+    avoider->checkForCollision();
 
     viewer.setTitle("Life");
     viewer.setHeight(500);

@@ -1,16 +1,16 @@
-#ifndef ANIMATOR_H
-#define ANIMATOR_H
+#ifndef AVOIDER_H
+#define AVOIDER_H
 #include <QTimer>
 #include <QThread>
 #include <QMutex>
 #include "consumer.h"
 
 /* For now, really basic */
-class Animator : public QObject
+class Avoider : public QObject
 {
     Q_OBJECT
 public:
-    explicit Animator(QObject *obj = 0, Consumer *consumer = 0, MainObject *main = 0,
+    explicit Avoider(QObject *obj = 0, Consumer *consumer = 0, MainObject *main = 0,
                       QObject *parent = 0);
     QTimer *timer;
 public slots:

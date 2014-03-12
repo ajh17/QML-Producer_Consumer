@@ -1,6 +1,6 @@
-#include "animator.h"
+#include "avoider.h"
 
-Animator::Animator(QObject *obj, Consumer *consumer, MainObject *main,
+Avoider::Avoider(QObject *obj, Consumer *consumer, MainObject *main,
                    QObject *parent) : QObject(parent)
 {
     timer = new QTimer(this);
@@ -12,7 +12,7 @@ Animator::Animator(QObject *obj, Consumer *consumer, MainObject *main,
     timer->start(2000);
 }
 
-void Animator::checkForCollision()
+void Avoider::checkForCollision()
 {
     QList<QObject *> boxes = m_obj->findChildren<QObject *>("box");
     QList<QObject *> boxesCopy = m_obj->findChildren<QObject *>("box");
