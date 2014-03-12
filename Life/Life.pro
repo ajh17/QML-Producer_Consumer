@@ -11,7 +11,7 @@ SOURCES += main.cpp \
     producer.cpp \
     consumer.cpp \
     mainobject.cpp \
-    animator.cpp
+    avoider.cpp
 
 # Installation path
 # target.path =
@@ -24,7 +24,7 @@ HEADERS += \
     producer.h \
     consumer.h \
     mainobject.h \
-    animator.h
+    avoider.h
 
 OTHER_FILES += \
     helper.js

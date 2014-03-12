@@ -1,6 +1,7 @@
 #include "consumer.h"
 
-Consumer::Consumer(QObject *obj, MainObject *main, QObject *parent) : QObject(parent)
+Consumer::Consumer(QObject *obj, MainObject *main,
+                   QObject *parent) : QObject(parent)
 {
     timer = new QTimer(this);
     m_obj = obj;
@@ -35,8 +36,8 @@ void Consumer::consume(int id)
         QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection,
                                   Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, box));
         mutex.unlock();
-    } else {
+    }
+    else {
         qDebug() << "Viewer doesn't exist";
     }
 }
-

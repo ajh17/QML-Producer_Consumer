@@ -14,6 +14,7 @@ public slots:
     void insertBox(QVariant box);
     void updateHash(int id, QVariant box);
     int getKeyFor(QVariant box);
+    QList<int> getKeys();
     QVariant removeBox(int id);
     int hashSize();
     QVariant getBox(int id);
