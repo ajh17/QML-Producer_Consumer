@@ -1,13 +1,18 @@
 #include "animator.h"
 
-Animator::Animator(QObject *obj, MainObject *main, QObject *parent) : QObject(parent)
+Animator::Animator(QObject *obj, Consumer *consumer, MainObject *main,
+                   QObject *parent) : QObject(parent)
 {
     m_obj = obj;
     m_main = main;
+    m_consumer = consumer;
 }
 
-void Animator::checkForCollision(const QVariant &obj)
+void Animator::checkForCollision()
 {
-    qDebug() << "recieved";
-}
+    QList<QVariant*> boxes = m_obj->findChildren<QVariant*>("box");
 
+    foreach (QVariant* b, boxes) {
+        qDebug() << b;
+    }
+}
