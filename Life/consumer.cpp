@@ -8,7 +8,7 @@ Consumer::Consumer(QObject *obj, MainObject *main,
     m_main = main;
 
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
-    timer->start(3000);
+    //timer->start(3000);
 }
 
 void Consumer::startConsuming()
@@ -30,12 +30,19 @@ void Consumer::consume(int id)
     if (m_obj) {
         qDebug() << "Consumer Thread ID: " << thread()->currentThreadId();
         QVariant retVal;
+        QMutexLocker locker(&mutex);
 
-        mutex.lock();
+        if (m_main->getBox(id).isNull()) {
+            qDebug() << "Already deleted";
+            qDebug() << "ID: " << id;
+            return;
+        }
+
+        qDebug() << "ID: " << id;
         QVariant box = m_main->removeBox(id);
         QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection,
-                                  Q_RETURN_ARG(QVariant, retVal), Q_ARG(QVariant, box));
-        mutex.unlock();
+                                  Q_RETURN_ARG(QVariant, retVal),
+                                  Q_ARG(QVariant, box));
     }
     else {
         qDebug() << "Viewer doesn't exist";
