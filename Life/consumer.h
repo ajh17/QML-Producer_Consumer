@@ -13,7 +13,7 @@ public:
     QTimer *timer;
 public slots:
     void startConsuming();
-    void consume(int id);
+    void consume(int id, Qt::HANDLE threadID);
 private:
     QObject *m_obj;
     MainObject *m_main;

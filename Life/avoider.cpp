@@ -14,12 +14,13 @@ Avoider::Avoider(QObject *obj, MainObject *main, Consumer *consumer,
 
 void Avoider::checkForCollision()
 {
-    QList<QObject *> boxes = m_obj->findChildren<QObject *>("box");
+    QList<QObject *> boxes = m_obj->findChildren<QObject *>("box",
+                             Qt::FindChildrenRecursively);
     QList<QObject *>::iterator itr;
 
     // Algorithm is currently O(n^2)
     // TODO: Make this better.
-    foreach(QObject *b, boxes) {
+    foreach(QObject * b, boxes) {
         QVariant temp1 = QQmlProperty::read(b, "x");
         QVariant temp2 = QQmlProperty::read(b, "y");
         double bx = temp1.toDouble();
@@ -43,12 +44,11 @@ void Avoider::checkForCollision()
                     boxes.removeOne(*itr);
 
                     qDebug() << "Deleting " << box << "ID: " << id;
-                    m_consumer->consume(id);
+                    m_consumer->consume(id, thread()->currentThreadId());
                     qDebug() << "Deleting " << box2 << "ID: " << id2;
-                    m_consumer->consume(id2);
+                    m_consumer->consume(id2, thread()->currentThreadId());
                 }
             }
         }
     }
 }
-

@@ -22,13 +22,18 @@ void Consumer::startConsuming()
     while (! m_main->didFind(randomID)) {
         randomID = qrand() % hashSize;
     }
-    this->consume(randomID);
+    this->consume(randomID, thread()->currentThreadId());
 }
 
-void Consumer::consume(int id)
+void Consumer::consume(int id, Qt::HANDLE threadID)
 {
     if (m_obj) {
-        qDebug() << "Consumer Thread ID: " << thread()->currentThreadId();
+        if (threadID == thread()->currentThreadId()) {
+            qDebug() << "Called from Consumer thread: " << threadID;
+        }
+        else {
+            qDebug() << "Called from Avoider thread: " << threadID;
+        }
         QVariant retVal;
         QMutexLocker locker(&mutex);
 
