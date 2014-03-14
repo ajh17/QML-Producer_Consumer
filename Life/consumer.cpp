@@ -6,6 +6,7 @@ Consumer::Consumer(QObject *obj, MainObject *main,
     timer = new QTimer(this);
     m_obj = obj;
     m_main = main;
+    m_threadID = thread()->currentThreadId();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
     //timer->start(3000);
@@ -28,7 +29,7 @@ void Consumer::startConsuming()
 void Consumer::consume(int id, Qt::HANDLE threadID)
 {
     if (m_obj) {
-        if (threadID == thread()->currentThreadId()) {
+        if (threadID == m_threadID) {
             qDebug() << "Called from Consumer thread: " << threadID;
         }
         else {

@@ -17,6 +17,7 @@ public slots:
 private:
     QObject *m_obj;
     MainObject *m_main;
+    Qt::HANDLE m_threadID;
     QMutex mutex;
 };
 
