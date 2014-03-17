@@ -32,13 +32,13 @@ void Avoider::checkForCollision()
 
     // Algorithm is currently O(n^2)
     // TODO: Make this better.
-    while (boxesItr1 != boxesMap.end() && boxesItr1.value()) {
+    while (boxesItr1.value() && boxesItr1 != boxesMap.end()) {
         QVariant temp1 = QQmlProperty::read(boxesItr1.key(), "x");
         QVariant temp2 = QQmlProperty::read(boxesItr1.key(), "y");
         double bx = temp1.toDouble();
         double by = temp2.toDouble();
 
-        while (boxesItr2 != boxesMap.end() && boxesItr2.value()) {
+        while (boxesItr2.value() && boxesItr2 != boxesMap.end()) {
             if (boxesItr2.key() != boxesItr1.key()) {
                 double ix = QQmlProperty::read(boxesItr2.key(), "x").toDouble();
                 double iy = QQmlProperty::read(boxesItr2.key(), "y").toDouble();
