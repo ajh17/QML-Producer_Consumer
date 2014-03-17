@@ -36,7 +36,7 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
             qDebug() << "Called from Avoider thread: " << threadID;
         }
         QVariant retVal;
-        QMutexLocker locker(&mutex);
+        mutex.lock();
 
         if (m_main->getBox(id).isNull()) {
             qDebug() << "Already deleted";
@@ -49,6 +49,7 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
         QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection,
                                   Q_RETURN_ARG(QVariant, retVal),
                                   Q_ARG(QVariant, box));
+        mutex.unlock();
     }
     else {
         qDebug() << "Viewer doesn't exist";
