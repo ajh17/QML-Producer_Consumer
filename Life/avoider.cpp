@@ -24,7 +24,7 @@ void Avoider::checkForCollision()
     QMap<QObject *, bool>::iterator boxesItr2;
 
     while (itr != boxes.constEnd()) {
-        boxesMap.insert(*itr, false);
+        boxesMap.insert(*itr, true);
         ++itr;
     }
     boxesItr1 = boxesMap.begin();
@@ -32,7 +32,7 @@ void Avoider::checkForCollision()
 
     // Algorithm is currently O(n^2)
     // TODO: Make this better.
-    while (boxesItr1 != boxesMap.end()) {
+    while (boxesItr1 != boxesMap.end() && boxesItr1.value()) {
         QVariant temp1 = QQmlProperty::read(boxesItr1.key(), "x");
         QVariant temp2 = QQmlProperty::read(boxesItr1.key(), "y");
         double bx = temp1.toDouble();
@@ -49,8 +49,8 @@ void Avoider::checkForCollision()
                     int id = m_main->getKeyFor(box);
                     int id2 = m_main->getKeyFor(box2);
 
-                    boxesMap.insert(boxesItr1.key(), true);
-                    boxesMap.insert(boxesItr2.key(), true);
+                    boxesMap.insert(boxesItr1.key(), false);
+                    boxesMap.insert(boxesItr2.key(), false);
 
                     m_consumer->consume(id, thread()->currentThreadId());
                     m_consumer->consume(id2, thread()->currentThreadId());
