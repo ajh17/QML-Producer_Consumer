@@ -38,7 +38,7 @@ void Avoider::checkForCollision()
         double bx = temp1.toDouble();
         double by = temp2.toDouble();
 
-        while (boxesItr2 != boxesMap.end()) {
+        while (boxesItr2 != boxesMap.end() && boxesItr2.value()) {
             if (boxesItr2.key() != boxesItr1.key()) {
                 double ix = QQmlProperty::read(boxesItr2.key(), "x").toDouble();
                 double iy = QQmlProperty::read(boxesItr2.key(), "y").toDouble();

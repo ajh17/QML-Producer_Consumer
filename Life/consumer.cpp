@@ -9,7 +9,7 @@ Consumer::Consumer(QObject *obj, MainObject *main,
     m_threadID = thread()->currentThreadId();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
-    //timer->start(3000);
+    timer->start(3000);
 }
 
 void Consumer::startConsuming()
