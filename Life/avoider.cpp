@@ -1,7 +1,7 @@
 #include "avoider.h"
 
 Avoider::Avoider(QObject *obj, MainObject *main, Consumer *consumer,
-        QObject *parent) : QObject(parent)
+                 QObject *parent) : QObject(parent)
 {
     timer = new QTimer(this);
     m_obj = obj;
@@ -15,7 +15,7 @@ Avoider::Avoider(QObject *obj, MainObject *main, Consumer *consumer,
 void Avoider::checkForCollision()
 {
     QList<QObject *> boxes = m_obj->findChildren<QObject *>("box",
-            Qt::FindChildrenRecursively);
+                             Qt::FindChildrenRecursively);
     QMap<QObject *, bool> boxesMap;
 
     // Iterators
