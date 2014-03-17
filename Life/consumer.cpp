@@ -6,9 +6,10 @@ Consumer::Consumer(QObject *obj, MainObject *main,
     timer = new QTimer(this);
     m_obj = obj;
     m_main = main;
+    m_threadID = thread()->currentThreadId();
 
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
-    //timer->start(3000);
+    timer->start(3000);
 }
 
 void Consumer::startConsuming()
@@ -22,13 +23,18 @@ void Consumer::startConsuming()
     while (! m_main->didFind(randomID)) {
         randomID = qrand() % hashSize;
     }
-    this->consume(randomID);
+    this->consume(randomID, thread()->currentThreadId());
 }
 
-void Consumer::consume(int id)
+void Consumer::consume(int id, Qt::HANDLE threadID)
 {
     if (m_obj) {
-        qDebug() << "Consumer Thread ID: " << thread()->currentThreadId();
+        if (threadID == m_threadID) {
+            qDebug() << "Called from Consumer thread: " << threadID;
+        }
+        else {
+            qDebug() << "Called from Avoider thread: " << threadID;
+        }
         QVariant retVal;
         QMutexLocker locker(&mutex);
 

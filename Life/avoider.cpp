@@ -14,41 +14,50 @@ Avoider::Avoider(QObject *obj, MainObject *main, Consumer *consumer,
 
 void Avoider::checkForCollision()
 {
-    QList<QObject *> boxes = m_obj->findChildren<QObject *>("box");
-    QList<QObject *>::iterator itr;
+    QList<QObject *> boxes = m_obj->findChildren<QObject *>("box",
+                             Qt::FindChildrenRecursively);
+    QMap<QObject *, bool> boxesMap;
+
+    // Iterators
+    QList<QObject *>::const_iterator itr = boxes.constBegin();
+    QMap<QObject *, bool>::iterator boxesItr1;
+    QMap<QObject *, bool>::iterator boxesItr2;
+
+    while (itr != boxes.constEnd()) {
+        boxesMap.insert(*itr, true);
+        ++itr;
+    }
+    boxesItr1 = boxesMap.begin();
+    boxesItr2 = boxesMap.begin();
 
     // Algorithm is currently O(n^2)
     // TODO: Make this better.
-    foreach(QObject *b, boxes) {
-        QVariant temp1 = QQmlProperty::read(b, "x");
-        QVariant temp2 = QQmlProperty::read(b, "y");
+    while (boxesItr1 != boxesMap.end() && boxesItr1.value()) {
+        QVariant temp1 = QQmlProperty::read(boxesItr1.key(), "x");
+        QVariant temp2 = QQmlProperty::read(boxesItr1.key(), "y");
         double bx = temp1.toDouble();
         double by = temp2.toDouble();
 
-        for (itr = boxes.begin(); itr != boxes.end(); ++itr) {
-            if (*itr != b) {
-                QVariant temp3 = QQmlProperty::read(*itr, "x");
-                QVariant temp4 = QQmlProperty::read(*itr, "y");
-                double ix = temp3.toDouble();
-                double iy = temp4.toDouble();
+        while (boxesItr2 != boxesMap.end() && boxesItr2.value()) {
+            if (boxesItr2.key() != boxesItr1.key()) {
+                double ix = QQmlProperty::read(boxesItr2.key(), "x").toDouble();
+                double iy = QQmlProperty::read(boxesItr2.key(), "y").toDouble();
 
                 if ((abs(ix - bx) <= 50) || (abs(iy - by) <= 50)) {
-                    QVariant returnVal;
-                    QVariant box = QVariant::fromValue(b);
-                    QVariant box2 = QVariant::fromValue(*itr);
+                    QVariant box = QVariant::fromValue(boxesItr1.key());
+                    QVariant box2 = QVariant::fromValue(boxesItr2.key());
                     int id = m_main->getKeyFor(box);
                     int id2 = m_main->getKeyFor(box2);
 
-                    boxes.removeOne(b);
-                    boxes.removeOne(*itr);
+                    boxesMap.insert(boxesItr1.key(), false);
+                    boxesMap.insert(boxesItr2.key(), false);
 
-                    qDebug() << "Deleting " << box << "ID: " << id;
-                    m_consumer->consume(id);
-                    qDebug() << "Deleting " << box2 << "ID: " << id2;
-                    m_consumer->consume(id2);
+                    m_consumer->consume(id, thread()->currentThreadId());
+                    m_consumer->consume(id2, thread()->currentThreadId());
                 }
             }
+            ++boxesItr2;
         }
+        ++boxesItr1;
     }
 }
-
