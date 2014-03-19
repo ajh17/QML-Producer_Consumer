@@ -14,6 +14,12 @@ Avoider::Avoider(QObject *obj, MainObject *main, Consumer *consumer,
 
 void Avoider::checkForCollision()
 {
+    if (!m_obj) {
+        qDebug() << "Viewer was null";
+        return;
+    }
+
+    qDebug() << "Avoider Thread ID: " << thread()->currentThreadId();
     QList<QObject *> boxes = m_obj->findChildren<QObject *>("box",
                              Qt::FindChildrenRecursively);
     QMap<QObject *, bool> boxesMap;
@@ -24,14 +30,11 @@ void Avoider::checkForCollision()
     QMap<QObject *, bool>::iterator boxesItr2;
 
     while (itr != boxes.constEnd()) {
-        boxesMap.insert(*itr, true);
-        ++itr;
+        boxesMap.insert(*itr++, true);
     }
     boxesItr1 = boxesMap.begin();
     boxesItr2 = boxesMap.begin();
 
-    // Algorithm is currently O(n^2)
-    // TODO: Make this better.
     while (boxesItr1.value() && boxesItr1 != boxesMap.end()) {
         QVariant temp1 = QQmlProperty::read(boxesItr1.key(), "x");
         QVariant temp2 = QQmlProperty::read(boxesItr1.key(), "y");
@@ -44,15 +47,12 @@ void Avoider::checkForCollision()
                 double iy = QQmlProperty::read(boxesItr2.key(), "y").toDouble();
 
                 if ((abs(ix - bx) <= 50) || (abs(iy - by) <= 50)) {
-                    QVariant box = QVariant::fromValue(boxesItr1.key());
                     QVariant box2 = QVariant::fromValue(boxesItr2.key());
-                    int id = m_main->getKeyFor(box);
                     int id2 = m_main->getKeyFor(box2);
 
                     boxesMap.insert(boxesItr1.key(), false);
                     boxesMap.insert(boxesItr2.key(), false);
 
-                    m_consumer->consume(id, thread()->currentThreadId());
                     m_consumer->consume(id2, thread()->currentThreadId());
                 }
             }

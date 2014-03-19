@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    qDebug() << "GUI thread reporting in! " << app.thread()->currentThreadId();
+    qDebug() << "GUI Thread ID: " << app.thread()->currentThreadId();
 
     // Construct two threads for producer and consumer.
     QThread *produceThread = new QThread();

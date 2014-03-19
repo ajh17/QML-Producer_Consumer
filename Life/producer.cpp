@@ -14,6 +14,7 @@ void Producer::produceTimer()
 {
     if (!m_obj) {
         qDebug() << "Viewer was null";
+        return;
     }
     qDebug() << "Producer Thread ID: " << thread()->currentThreadId();
     QVariant boxObject;

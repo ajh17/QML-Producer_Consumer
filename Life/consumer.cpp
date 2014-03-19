@@ -6,14 +6,18 @@ Consumer::Consumer(QObject *obj, MainObject *main,
     timer = new QTimer(this);
     m_obj = obj;
     m_main = main;
-    m_threadID = thread()->currentThreadId();
-
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
     timer->start(3000);
 }
 
 void Consumer::startConsuming()
 {
+    if (!m_obj) {
+        qDebug() << "Viewer was null.";
+        return;
+    }
+    m_threadID = this->thread()->currentThreadId();
+    qDebug() << "Consumer Thread ID: " << m_threadID;
     int hashSize = m_main->hashSize();
     int randomID = qrand() % hashSize;
 
@@ -23,7 +27,7 @@ void Consumer::startConsuming()
     while (! m_main->didFind(randomID)) {
         randomID = qrand() % hashSize;
     }
-    this->consume(randomID, thread()->currentThreadId());
+    this->consume(randomID, m_threadID);
 }
 
 void Consumer::consume(int id, Qt::HANDLE threadID)
@@ -37,12 +41,6 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
         }
         QVariant retVal;
         mutex.lock();
-
-        if (m_main->getBox(id).isNull()) {
-            qDebug() << "Already deleted";
-            qDebug() << "ID: " << id;
-            return;
-        }
 
         qDebug() << "ID: " << id;
         QVariant box = m_main->removeBox(id);
