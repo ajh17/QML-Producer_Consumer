@@ -26,6 +26,12 @@ function destroyItem(itemID) {
     itemID.destroy();
 }
 
+function destroyUponCollision(parentID) {
+    for (var i = 1; i < children.length; ++i) {
+        console.log("hello! " + children[i]);
+    }
+}
+
 function getNewVal(oldVal) {
     var newVal = Math.floor((Math.random() * 420) + 1);
     if (newVal === oldVal) {
