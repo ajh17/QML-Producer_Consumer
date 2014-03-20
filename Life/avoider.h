@@ -13,9 +13,6 @@ public:
                      Consumer *consumer = 0, QObject *parent = 0);
     QTimer *timer;
 public slots:
-    /**
-     * Checks for collisions and destroys two objects if they collide.
-     */
     void checkForCollision();
 private:
     QObject *m_obj;

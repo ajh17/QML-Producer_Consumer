@@ -32,24 +32,19 @@ void Consumer::startConsuming()
 
 void Consumer::consume(int id, Qt::HANDLE threadID)
 {
-    if (m_obj) {
-        if (threadID == m_threadID) {
-            qDebug() << "Called from Consumer thread: " << threadID;
-        }
-        else {
-            qDebug() << "Called from Avoider thread: " << threadID;
-        }
-        QVariant retVal;
-        mutex.lock();
-
-        qDebug() << "ID: " << id;
-        QVariant box = m_main->removeBox(id);
-        QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection,
-                                  Q_RETURN_ARG(QVariant, retVal),
-                                  Q_ARG(QVariant, box));
-        mutex.unlock();
+    if (threadID == m_threadID) {
+        qDebug() << "Called from Consumer thread: " << threadID;
     }
     else {
-        qDebug() << "Viewer doesn't exist";
+        qDebug() << "Called from Avoider thread: " << threadID;
     }
+    QVariant retVal;
+    mutex.lock();
+
+    qDebug() << "ID: " << id;
+    QVariant box = m_main->removeBox(id);
+    QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection,
+                              Q_RETURN_ARG(QVariant, retVal),
+                              Q_ARG(QVariant, box));
+    mutex.unlock();
 }

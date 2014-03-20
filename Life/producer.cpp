@@ -26,7 +26,7 @@ void Producer::produceTimer()
 
     if (!success) {
         qDebug() << "Unable to call QML function callCreate";
+        return;
     }
-
     m_main->insertBox(boxObject);
 }
