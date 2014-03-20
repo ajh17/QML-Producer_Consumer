@@ -34,4 +34,9 @@ Rectangle {
         PropertyAnimation { to: Script.getNewVal(y); }
         PropertyAnimation { to: Script.getNewVal(y); }
     }
+
+    Timer {
+        running: true; interval: 2001
+        onTriggered: Script.destroyUponCollision(rectID.parent)
+    }
 }
