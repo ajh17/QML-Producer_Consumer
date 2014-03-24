@@ -26,9 +26,27 @@ function destroyItem(itemID) {
     itemID.destroy();
 }
 
+// Destroys boxes on contact.
 function destroyUponCollision(parentID) {
-    for (var i = 1; i < children.length; ++i) {
-        console.log("hello! " + children[i]);
+    var childrenList = parentID.children,
+    rect = childrenList[0];
+    for (var i in childrenList) {
+        for (var j in childrenList) {
+            if (childrenList[i] !== childrenList[j]) {
+                if (childrenList[i] !== rect && childrenList[j] !== rect) {
+                    var ix = childrenList[i].x, iy = childrenList[i].y,
+                    jx = childrenList[j].x, jy = childrenList[j].y;
+
+                    if ((Math.abs(ix - jx) <= 50) && (Math.abs(iy - jy) <= 50)) {
+                        console.log("TEST ABS: " + Math.abs(iy - jy));
+                        console.log("TEST: " + childrenList[i] + "x" + childrenList[i].x);
+                        console.log("TEST: " + childrenList[j] + "x" + childrenList[j].x);
+                        destroyItem(childrenList[i]);
+                        destroyItem(childrenList[j]);
+                    }
+                }
+            }
+        }
     }
 }
 
