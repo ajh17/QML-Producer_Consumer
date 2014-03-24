@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     // Construct two threads for producer and consumer.
     QThread *produceThread = new QThread();
     QThread *consumeThread = new QThread();
-    QThread *avoiderThread = new QThread();
+    //QThread *avoiderThread = new QThread();
 
     // Read QML File
     QQuickView viewer;
@@ -50,9 +50,9 @@ int main(int argc, char *argv[])
     consumeThread->start();
 
     // Start Avoider
-    Avoider *avoider = new Avoider(item, mainObject, consumer);
-    avoider->moveToThread(avoiderThread);
-    avoiderThread->start();
+    // Avoider *avoider = new Avoider(item, mainObject, consumer);
+    // avoider->moveToThread(avoiderThread);
+    // avoiderThread->start();
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
