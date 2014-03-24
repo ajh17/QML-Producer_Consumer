@@ -9,7 +9,7 @@ Avoider::Avoider(QObject *obj, MainObject *main, Consumer *consumer,
     m_consumer = consumer;
 
     connect(timer, SIGNAL(timeout()), this, SLOT(checkForCollision()));
-    timer->start(2000);
+    timer->start(1000);
 }
 
 void Avoider::checkForCollision()
