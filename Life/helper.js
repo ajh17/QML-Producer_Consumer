@@ -38,9 +38,6 @@ function destroyUponCollision(parentID) {
                     jx = childrenList[j].x, jy = childrenList[j].y;
 
                     if ((Math.abs(ix - jx) <= 50) && (Math.abs(iy - jy) <= 50)) {
-                        console.log("TEST ABS: " + Math.abs(iy - jy));
-                        console.log("TEST: " + childrenList[i] + "x" + childrenList[i].x);
-                        console.log("TEST: " + childrenList[j] + "x" + childrenList[j].x);
                         destroyItem(childrenList[i]);
                         destroyItem(childrenList[j]);
                     }
