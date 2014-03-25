@@ -30,6 +30,7 @@ function destroyItem(itemID) {
 function destroyUponCollision(parentID) {
     var childrenList = parentID.children,
     rect = childrenList[0];
+    console.log("RECT: " + rect);
     for (var i in childrenList) {
         for (var j in childrenList) {
             if (childrenList[i] !== childrenList[j]) {
@@ -38,6 +39,11 @@ function destroyUponCollision(parentID) {
                     jx = childrenList[j].x, jy = childrenList[j].y;
 
                     if ((Math.abs(ix - jx) <= 50) && (Math.abs(iy - jy) <= 50)) {
+                        var firstBox = childrenList[i], secondBox = childrenList[j];
+                        console.log("<<***>> " + firstBox + " (" +  firstBox.x + "," , + firstBox.y +
+                        ") and " + secondBox + " (" + firstBox.x + "," , + firstBox.y +
+                        ") have collided.");
+
                         destroyItem(childrenList[i]);
                         destroyItem(childrenList[j]);
                     }
