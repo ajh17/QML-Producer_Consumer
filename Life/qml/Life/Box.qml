@@ -36,7 +36,7 @@ Rectangle {
     }
 
     Timer {
-        running: true; interval: 2001
+        running: true; interval: 1000
         onTriggered: Script.destroyUponCollision(rectID.parent)
     }
 }
