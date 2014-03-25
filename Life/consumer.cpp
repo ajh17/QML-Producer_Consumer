@@ -39,7 +39,13 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
         qDebug() << "Called from Avoider thread: " << threadID;
     }
     QVariant retVal;
-    mutex.lock();
+
+    if (!mutex.tryLock()) {
+        qDebug() << "Lock failed.";
+    }
+    else {
+        qDebug() << "Locking consumer.";
+    }
 
     qDebug() << "ID: " << id;
     QVariant box = m_main->removeBox(id);
