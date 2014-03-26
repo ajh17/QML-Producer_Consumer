@@ -12,9 +12,17 @@ public:
     explicit Consumer(QObject *obj = 0, MainObject *main = 0, QObject *parent = 0);
     QTimer *timer;
 public slots:
+    void consumeSlot(const QVariant &obj)
+    {
+        qDebug() << "Called consumeSlot!";
+        consume(m_main->getKeyFor(obj), this->thread()->currentThreadId());
+    }
     void startConsuming();
     void consume(int id, Qt::HANDLE threadID);
-    void consumeSlot();
+    void testSlot()
+    {
+        qDebug() << "It works!";
+    }
 private:
     QObject *m_obj;
     MainObject *m_main;
@@ -23,4 +31,3 @@ private:
 };
 
 #endif
-
