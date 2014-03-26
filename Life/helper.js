@@ -29,23 +29,24 @@ function destroyItem(itemID) {
 // Destroys boxes on contact.
 function destroyUponCollision(parentID) {
     var childrenList = parentID.children,
-    rect = childrenList[0];
-    console.log("RECT: " + rect);
+    var logString = "";
+    var childrenList = parentID.children;
     for (var i in childrenList) {
         for (var j in childrenList) {
-            if (childrenList[i] !== childrenList[j]) {
-                if (childrenList[i] !== rect && childrenList[j] !== rect) {
-                    var ix = childrenList[i].x, iy = childrenList[i].y,
-                    jx = childrenList[j].x, jy = childrenList[j].y;
+            var firstBox = childrenList[i], secondBox = childrenList[j];
+            if (firstBox !== secondBox) {
+                if (firstBox !== rect && secondBox !== rect) {
+                    var ix = firstBox.x, iy = firstBox.y,
+                    jx = secondBox.x, jy = secondBox.y;
 
                     if ((Math.abs(ix - jx) <= 50) && (Math.abs(iy - jy) <= 50)) {
-                        var firstBox = childrenList[i], secondBox = childrenList[j];
-                        console.log("<<***>> " + firstBox + " (" +  firstBox.x + "," , + firstBox.y +
-                        ") and " + secondBox + " (" + firstBox.x + "," , + firstBox.y +
-                        ") have collided.");
+                        logString += "<<***>> " + firstBox + " (" +  firstBox.x + "," + firstBox.y;
+                        logString += ") and " + secondBox + " (" + firstBox.x + "," , + firstBox.y;
+                        logString += ") have collided.\n";
+                        console.log(logString);
 
-                        destroyItem(childrenList[i]);
-                        destroyItem(childrenList[j]);
+                        destroyItem(firstBox);
+                        destroyItem(secondBox);
                     }
                 }
             }
