@@ -14,6 +14,7 @@ public:
 public slots:
     void startConsuming();
     void consume(int id, Qt::HANDLE threadID);
+    void consumeSlot();
 private:
     QObject *m_obj;
     MainObject *m_main;
