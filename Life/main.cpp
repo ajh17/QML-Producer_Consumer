@@ -14,7 +14,7 @@ struct CleanExit {
     }
 
     static void exitQt(int sig) {
-        qDebug() << "Recieved signal " << sig;
+        qDebug() << "Recieved signal" << sig;
         QCoreApplication::exit(0);
     }
 };
