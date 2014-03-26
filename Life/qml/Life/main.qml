@@ -12,10 +12,14 @@ Rectangle {
     function destroyBox(itemID) {
         return Script.destroyItem(itemID);
     }
+
     function quit() {
         console.log("Quitting App!");
         Qt.quit();
     }
+
+    signal testSignal();
+    signal consumeSignal(var anObject);
 
     // Quit Button {{{
     Rectangle {
