@@ -14,7 +14,6 @@ struct CleanExit {
     }
 
     static void exitQt(int sig) {
-        qDebug() << "Recieved signal " << sig;
         QCoreApplication::exit(0);
     }
 };
@@ -50,7 +49,6 @@ int main(int argc, char *argv[])
     consumer->moveToThread(consumeThread);
     consumeThread->start();
 
-    // NOTE: Uncomment the following to run collision detection in C++
     // Start Avoider
     // Avoider *avoider = new Avoider(item, mainObject, consumer);
     // avoider->moveToThread(avoiderThread);
