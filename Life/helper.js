@@ -1,4 +1,5 @@
 function createBox() {
+    "use strict";
     var component = Qt.createComponent("qml/Life/Box.qml"),
         xVal      = Math.floor((Math.random() * 420) + 1),
         yVal      = Math.floor((Math.random() * 420) + 1),
@@ -20,12 +21,14 @@ function createBox() {
 }
 
 function destroyItem(itemID) {
+    "use strict";
     console.log("Destroyed " + itemID);
     itemID.destroy();
 }
 
 // Destroys boxes on contact.
 function destroyUponCollision(parentID) {
+    "use strict";
     var logString    = "",
         childrenList = parentID.children,
         rect         = childrenList[0];
@@ -46,8 +49,8 @@ function destroyUponCollision(parentID) {
                     logString += "," + firstBox.y + ") have collided.\n";
                     console.log(logString);
 
-                    parentID.consumeSignal(firstBox);
-                    parentID.consumeSignal(secondBox);
+                    Consumer.consumeSlog(firstBox);
+                    Consumer.consumeSlot(secondBox);
                 }
             }
         }
@@ -55,6 +58,7 @@ function destroyUponCollision(parentID) {
 }
 
 function getNewVal(oldVal) {
+    "use strict";
     var newVal = Math.floor((Math.random() * 420) + 1);
     if (newVal !== oldVal) {
         return newVal;
