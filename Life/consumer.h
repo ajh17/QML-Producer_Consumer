@@ -3,6 +3,7 @@
 #include <QTimer>
 #include <QThread>
 #include <QMutex>
+#include <QVariant>
 #include "mainobject.h"
 
 class Consumer : public QObject
@@ -11,12 +12,8 @@ class Consumer : public QObject
 public:
     explicit Consumer(QObject *obj = 0, MainObject *main = 0, QObject *parent = 0);
     QTimer *timer;
+    Q_INVOKABLE void consumeSlot(QVariant &obj);
 public slots:
-    void consumeSlot(const QVariant &obj)
-    {
-        qDebug() << "Called consumeSlot!";
-        consume(m_main->getKeyFor(obj), this->thread()->currentThreadId());
-    }
     void startConsuming();
     void consume(int id, Qt::HANDLE threadID);
     void testSlot()
