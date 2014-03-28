@@ -16,10 +16,6 @@ public:
 public slots:
     void startConsuming();
     void consume(int id, Qt::HANDLE threadID);
-    void testSlot()
-    {
-        qDebug() << "It works!";
-    }
 private:
     QObject *m_obj;
     MainObject *m_main;

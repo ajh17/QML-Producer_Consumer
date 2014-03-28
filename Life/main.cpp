@@ -48,9 +48,6 @@ int main(int argc, char *argv[])
 
     // <-- Signals from QML to C++ -->
     QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
-    QObject::connect(item, SIGNAL(testSignal()), consumer, SLOT(testSlot()));
-    QObject::connect(item, SIGNAL(consumeSignal(QVariant)), consumer,
-                     SLOT(consumeSlot(QVariant)));
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
