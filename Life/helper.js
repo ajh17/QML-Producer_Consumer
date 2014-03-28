@@ -51,13 +51,12 @@ function destroyUponCollision(parentID) {
 
                 if (Math.abs(ix - jx) <= 50 && Math.abs(iy - jy) <= 50) {
                     logString += "<<***>> " + firstBox + " (" +  firstBox.x;
-                    logString += "," + firstBox.y;
-                    logString += ") and " + secondBox + " (" + firstBox.x;
-                    logString += "," + firstBox.y + ") have collided.\n";
+                    logString += ", " + firstBox.y;
+                    logString += ") and " + secondBox + " (" + secondBox.x;
+                    logString += ", " + secondBox.y + ") have collided.\n";
                     console.log(logString);
 
                     consumer.consumeSlot(firstBox);
-                    consumer.consumeSlot(secondBox);
                 }
             }
         }
