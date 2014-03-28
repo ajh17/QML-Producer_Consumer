@@ -42,6 +42,7 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
 
     if (!mutex.tryLock()) {
         qDebug() << "Lock failed.";
+        return;
     }
     else {
         qDebug() << "Locking consumer.";
@@ -49,8 +50,7 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
 
     qDebug() << "ID: " << id;
     QVariant box = m_main->removeBox(id);
-    QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection,
-                              Q_RETURN_ARG(QVariant, retVal),
+    QMetaObject::invokeMethod(m_obj, "destroyBox", Q_RETURN_ARG(QVariant, retVal),
                               Q_ARG(QVariant, box));
     mutex.unlock();
 }
