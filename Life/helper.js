@@ -1,5 +1,7 @@
+/*global Qt,Component,appWindow,Consumer*/
+"use strict";
+
 function createBox() {
-    "use strict";
     var component = Qt.createComponent("qml/Life/Box.qml"),
         xVal      = Math.floor((Math.random() * 420) + 1),
         yVal      = Math.floor((Math.random() * 420) + 1),
@@ -14,33 +16,38 @@ function createBox() {
         console.log("Created " + box + "(" + xVal + ", " + yVal + ")");
         return box;
     }
-    else if (component.status === Component.Error) {
-        console.log("Error loading the box:", component.errorString());
-        return 2;
-    }
+    console.log("Error loading the box:", component.errorString());
+    return 2;
 }
 
 function destroyItem(itemID) {
-    "use strict";
     console.log("Destroyed " + itemID);
     itemID.destroy();
 }
 
 // Destroys boxes on contact.
 function destroyUponCollision(parentID) {
-    "use strict";
-    var logString    = "",
-        childrenList = parentID.children,
-        rect         = childrenList[0];
+    var logString = "",
+        childrenList  = parentID.children,
+        rect          = childrenList[0],
+        firstBox,
+        secondBox,
+        i,
+        j,
+        ix,
+        jx,
+        iy,
+        jy;
 
-    for (var i in childrenList) {
-        for (var j in childrenList) {
-            var firstBox = childrenList[i], secondBox = childrenList[j];
+    for (i = 0; i < childrenList.length; i++) {
+        for (j = 0; j < childrenList.length; j++) {
+            firstBox = childrenList[i];
+            secondBox = childrenList[j];
             if (firstBox !== secondBox && (firstBox !== rect && secondBox !== rect)) {
-                var ix = firstBox.x,
-                    iy = firstBox.y,
-                    jx = secondBox.x,
-                    jy = secondBox.y;
+                ix = firstBox.x;
+                iy = firstBox.y;
+                jx = secondBox.x;
+                jy = secondBox.y;
 
                 if (Math.abs(ix - jx) <= 50 && Math.abs(iy - jy) <= 50) {
                     logString += "<<***>> " + firstBox + " (" +  firstBox.x;
@@ -58,7 +65,6 @@ function destroyUponCollision(parentID) {
 }
 
 function getNewVal(oldVal) {
-    "use strict";
     var newVal = Math.floor((Math.random() * 420) + 1);
     if (newVal !== oldVal) {
         return newVal;
