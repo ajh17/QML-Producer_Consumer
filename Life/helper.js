@@ -3,8 +3,8 @@
 
 function createBox() {
     var component = Qt.createComponent("qml/Life/Box.qml"),
-        xVal      = Math.floor((Math.random() * 420) + 1),
-        yVal      = Math.floor((Math.random() * 420) + 1),
+        xVal      = Math.floor(Math.random() * 420 + 1),
+        yVal      = Math.floor(Math.random() * 420 + 1),
         box;
 
     if (component.status === Component.Ready) {
@@ -50,10 +50,10 @@ function destroyUponCollision(parentID) {
                 jy = secondBox.y;
 
                 if (Math.abs(ix - jx) <= 50 && Math.abs(iy - jy) <= 50) {
-                    logString += "<<***>> " + firstBox + " (" +  firstBox.x;
-                    logString += ", " + firstBox.y;
-                    logString += ") and " + secondBox + " (" + secondBox.x;
-                    logString += ", " + secondBox.y + ") have collided.\n";
+                    logString += "<<***>> " + firstBox + " (" +  Math.floor(firstBox.x);
+                    logString += ", " + Math.floor(firstBox.y);
+                    logString += ") and " + secondBox + " (" + Math.floor(secondBox.x);
+                    logString += ", " + Math.floor(secondBox.y) + ") have collided.\n";
                     console.log(logString);
 
                     consumer.consumeSlot(firstBox);
@@ -64,7 +64,7 @@ function destroyUponCollision(parentID) {
 }
 
 function getNewVal(oldVal) {
-    var newVal = Math.floor((Math.random() * 420) + 1);
+    var newVal = Math.floor(Math.random() * 420 + 1);
     if (newVal !== oldVal) {
         return newVal;
     }
