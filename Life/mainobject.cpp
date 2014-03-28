@@ -53,8 +53,8 @@ QVariant MainObject::removeBox(int id)
 QVariant MainObject::getBox(int id)
 {
     mutex.lock();
-    mutex.unlock();
     QVariant box = QVariant::fromValue(boxHash.value(id));
+    mutex.unlock();
 
     return box;
 }
