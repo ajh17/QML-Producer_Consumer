@@ -15,7 +15,7 @@ struct CleanExit {
 
     static void exitQt(int sig)
     {
-        qDebug() << "Recieved signal" << sig;
+        qDebug() << "Received signal" << sig;
         QCoreApplication::exit(0);
     }
 };
@@ -45,10 +45,11 @@ int main(int argc, char *argv[])
     Consumer *consumer = new Consumer(item, mainObject);
     consumer->moveToThread(consumeThread);
     consumeThread->start();
-    viewer.rootContext()->setContextProperty("_consumer", consumer);
+    viewer.rootContext()->setContextProperty("consumer", consumer);
 
     // <-- Signals from QML to C++ -->
-    QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
+    QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app,
+                     SLOT(quit()));
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
