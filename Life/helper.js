@@ -1,24 +1,23 @@
+/*global Qt,Component,appWindow,Consumer,consumer*/
+"use strict";
+
 function createBox() {
-    var component = Qt.createComponent("qml/Life/Box.qml");
-    var xVal = Math.floor((Math.random() * 420) + 1);
-    var yVal = Math.floor((Math.random() * 420) + 1);
-    var box;
+    var component = Qt.createComponent("qml/Life/Box.qml"),
+        xVal      = Math.floor((Math.random() * 420) + 1),
+        yVal      = Math.floor((Math.random() * 420) + 1),
+        box;
 
     if (component.status === Component.Ready) {
         box = component.createObject(appWindow, { "x": xVal, "y": yVal });
         if (box === null) {
             console.log("Error creating the box");
+            return 1;
         }
-        else {
-            console.log("Created " + box + "(" + xVal + ", " + yVal + ")");
-            return box;
-        }
-        return 0;
+        console.log("Created " + box + "(" + xVal + ", " + yVal + ")");
+        return box;
     }
-    else if (component.status === Component.Error) {
-        console.log("Error loading the box:", component.errorString());
-        return 0;
-    }
+    console.log("Error loading the box:", component.errorString());
+    return 2;
 }
 
 function destroyItem(itemID) {
@@ -28,25 +27,36 @@ function destroyItem(itemID) {
 
 // Destroys boxes on contact.
 function destroyUponCollision(parentID) {
-    var childrenList = parentID.children,
-    rect = childrenList[0];
-    console.log("RECT: " + rect);
-    for (var i in childrenList) {
-        for (var j in childrenList) {
-            if (childrenList[i] !== childrenList[j]) {
-                if (childrenList[i] !== rect && childrenList[j] !== rect) {
-                    var ix = childrenList[i].x, iy = childrenList[i].y,
-                    jx = childrenList[j].x, jy = childrenList[j].y;
+    var logString = "",
+        childrenList  = parentID.children,
+        rect          = childrenList[0],
+        firstBox,
+        secondBox,
+        i,
+        j,
+        ix,
+        jx,
+        iy,
+        jy;
 
-                    if ((Math.abs(ix - jx) <= 50) && (Math.abs(iy - jy) <= 50)) {
-                        var firstBox = childrenList[i], secondBox = childrenList[j];
-                        console.log("<<***>> " + firstBox + " (" +  firstBox.x + "," , + firstBox.y +
-                        ") and " + secondBox + " (" + firstBox.x + "," , + firstBox.y +
-                        ") have collided.");
+    for (i = 0; i < childrenList.length; i++) {
+        for (j = 0; j < childrenList.length; j++) {
+            firstBox = childrenList[i];
+            secondBox = childrenList[j];
+            if (firstBox !== secondBox && (firstBox !== rect && secondBox !== rect)) {
+                ix = firstBox.x;
+                iy = firstBox.y;
+                jx = secondBox.x;
+                jy = secondBox.y;
 
-                        destroyItem(childrenList[i]);
-                        destroyItem(childrenList[j]);
-                    }
+                if (Math.abs(ix - jx) <= 50 && Math.abs(iy - jy) <= 50) {
+                    logString += "<<***>> " + firstBox + " (" +  firstBox.x;
+                    logString += ", " + firstBox.y;
+                    logString += ") and " + secondBox + " (" + secondBox.x;
+                    logString += ", " + secondBox.y + ") have collided.\n";
+                    console.log(logString);
+
+                    consumer.consumeSlot(firstBox);
                 }
             }
         }
@@ -55,10 +65,8 @@ function destroyUponCollision(parentID) {
 
 function getNewVal(oldVal) {
     var newVal = Math.floor((Math.random() * 420) + 1);
-    if (newVal === oldVal) {
-        getNewVal(oldVal);
-    }
-    else {
+    if (newVal !== oldVal) {
         return newVal;
     }
+    return getNewVal(oldVal);
 }

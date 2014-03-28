@@ -32,25 +32,39 @@ void Consumer::startConsuming()
 
 void Consumer::consume(int id, Qt::HANDLE threadID)
 {
+    // Invalid ID.
+    if (id == 0) {
+        return;
+    }
+
+    // Print out which thread called the consumer
     if (threadID == m_threadID) {
         qDebug() << "Called from Consumer thread: " << threadID;
+    }
+    else if (threadID == m_obj->thread()->currentThreadId()) {
+        qDebug() << "Called from the GUI Thread: " << threadID;
     }
     else {
         qDebug() << "Called from Avoider thread: " << threadID;
     }
-    QVariant retVal;
 
     if (!mutex.tryLock()) {
         qDebug() << "Lock failed.";
+        return;
     }
     else {
         qDebug() << "Locking consumer.";
     }
 
     qDebug() << "ID: " << id;
+
     QVariant box = m_main->removeBox(id);
-    QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::BlockingQueuedConnection,
-                              Q_RETURN_ARG(QVariant, retVal),
-                              Q_ARG(QVariant, box));
+    QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::DirectConnection, Q_ARG(QVariant, box));
     mutex.unlock();
+}
+
+void Consumer::consumeSlot(const QVariant &obj)
+{
+    qDebug() << "Removing: " << m_main->getKeyFor(obj);
+    consume(m_main->getKeyFor(obj), this->thread()->currentThreadId());
 }

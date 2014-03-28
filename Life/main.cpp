@@ -4,16 +4,18 @@
 #include "qtquick2applicationviewer.h"
 #include "producer.h"
 #include "consumer.h"
-#include "avoider.h"
 
 struct CleanExit {
-    CleanExit() {
+    CleanExit()
+    {
         signal(SIGINT, &CleanExit::exitQt);
         signal(SIGTERM, &CleanExit::exitQt);
         signal(SIGABRT, &CleanExit::exitQt);
     }
 
-    static void exitQt(int sig) {
+    static void exitQt(int sig)
+    {
+        qDebug() << "Received signal" << sig;
         QCoreApplication::exit(0);
     }
 };
@@ -24,35 +26,30 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     qDebug() << "GUI Thread ID: " << app.thread()->currentThreadId();
 
-    // Construct two threads for producer and consumer.
-    QThread *produceThread = new QThread();
-    QThread *consumeThread = new QThread();
-    //QThread *avoiderThread = new QThread();
-
     // Read QML File
     QQuickView viewer;
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
-
     QObject *item = viewer.rootObject();
-    QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
 
     // Setup main object.
     MainObject *mainObject = new MainObject(item);
 
     // Start producer thread
+    QThread *produceThread = new QThread();
     Producer *producer = new Producer(item, mainObject);
     producer->moveToThread(produceThread);
     produceThread->start();
 
     // Start consumer thread
+    QThread *consumeThread = new QThread();
     Consumer *consumer = new Consumer(item, mainObject);
     consumer->moveToThread(consumeThread);
     consumeThread->start();
+    viewer.rootContext()->setContextProperty("consumer", consumer);
 
-    // Start Avoider
-    // Avoider *avoider = new Avoider(item, mainObject, consumer);
-    // avoider->moveToThread(avoiderThread);
-    // avoiderThread->start();
+    // <-- Signals from QML to C++ -->
+    QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app,
+                     SLOT(quit()));
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
