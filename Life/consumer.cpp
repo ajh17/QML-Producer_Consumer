@@ -59,7 +59,7 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
     qDebug() << "ID: " << id;
 
     QVariant box = m_main->removeBox(id);
-    QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::DirectConnection, Q_ARG(QVariant, box));
+    QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::QueuedConnection, Q_ARG(QVariant, box));
     mutex.unlock();
 }
 
