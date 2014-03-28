@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
     Consumer *consumer = new Consumer(item, mainObject);
     consumer->moveToThread(consumeThread);
     consumeThread->start();
+    viewer.rootContext()->setContextProperty("_consumer", consumer);
 
     // <-- Signals from QML to C++ -->
     QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app, SLOT(quit()));
