@@ -55,7 +55,7 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
     mutex.unlock();
 }
 
-void Consumer::consumeSlot(QVariant &obj)
+void Consumer::consumeSlot(const QVariant &obj)
 {
     qDebug() << "Called consumeSlot!";
     consume(m_main->getKeyFor(obj), this->thread()->currentThreadId());
