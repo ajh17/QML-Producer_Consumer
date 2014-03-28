@@ -56,7 +56,7 @@ function destroyUponCollision(parentID) {
                     logString += "," + firstBox.y + ") have collided.\n";
                     console.log(logString);
 
-                    Consumer.consumeSlog(firstBox);
+                    Consumer.consumeSlot(firstBox);
                     Consumer.consumeSlot(secondBox);
                 }
             }
