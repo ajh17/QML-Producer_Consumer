@@ -18,7 +18,6 @@ void Producer::produceTimer()
     }
     qDebug() << "Producer Thread ID: " << thread()->currentThreadId();
     QVariant boxObject;
-    QMutexLocker locker(&mutex);
 
     bool success = QMetaObject::invokeMethod(m_obj, "callCreate",
                    Qt::BlockingQueuedConnection,

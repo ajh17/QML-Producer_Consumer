@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QDebug>
 #include <QVariant>
+#include <QMutex>
 
 class MainObject : public QObject
 {
@@ -21,6 +22,7 @@ public slots:
     bool didFind(int id);
 private:
     QObject *m_obj;
+    QMutex mutex;
     int id;
 };
 #endif

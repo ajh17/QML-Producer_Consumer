@@ -2,7 +2,6 @@
 #define CONSUMER_H
 #include <QTimer>
 #include <QThread>
-#include <QMutex>
 #include <QVariant>
 #include "mainobject.h"
 
@@ -20,7 +19,6 @@ private:
     QObject *m_obj;
     MainObject *m_main;
     Qt::HANDLE m_threadID;
-    QMutex mutex;
 };
 
 #endif

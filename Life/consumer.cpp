@@ -48,19 +48,10 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
         qDebug() << "Called from Avoider thread: " << threadID;
     }
 
-    if (!mutex.tryLock()) {
-        qDebug() << "Lock failed.";
-        return;
-    }
-    else {
-        qDebug() << "Locking consumer.";
-    }
-
     qDebug() << "ID: " << id;
-
     QVariant box = m_main->removeBox(id);
-    QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::QueuedConnection, Q_ARG(QVariant, box));
-    mutex.unlock();
+    QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::QueuedConnection,
+                              Q_ARG(QVariant, box));
 }
 
 void Consumer::consumeSlot(const QVariant &obj)

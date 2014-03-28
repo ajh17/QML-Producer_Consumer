@@ -15,41 +15,64 @@ void MainObject::insertBox(QVariant box)
 
 void MainObject::updateHash(int id, QVariant box)
 {
+    mutex.lock();
     boxHash.insert(id, box);
+    mutex.unlock();
 }
 
 int MainObject::getKeyFor(QVariant box)
 {
-    return boxHash.key(box);
+    mutex.lock();
+    int key = boxHash.key(box);
+    mutex.unlock();
+
+    return key;
 }
 
 QList<int> MainObject::getKeys()
 {
-    return boxHash.keys();
+    mutex.lock();
+    QList<int> keyList = boxHash.keys();
+    mutex.unlock();
+
+    return keyList;
 }
 
 QVariant MainObject::removeBox(int id)
 {
+    mutex.lock();
     QVariant removedBox = boxHash.value(id);
     qDebug() << "\n<<--- REMOVED Hash(" << id << "," << removedBox << "\n";
     boxHash.remove(id);
     --id;
+    mutex.unlock();
 
     return removedBox;
 }
 
 QVariant MainObject::getBox(int id)
 {
-    return boxHash.value(id);
+    mutex.lock();
+    mutex.unlock();
+    QVariant box = QVariant::fromValue(boxHash.value(id));
+
+    return box;
 }
 
 int MainObject::hashSize()
 {
-    return boxHash.size();
+    mutex.lock();
+    size_t size = boxHash.size();
+    mutex.unlock();
+
+    return size;
 }
 
 bool MainObject::didFind(int id)
 {
-    return boxHash.contains(id);
-}
+    mutex.lock();
+    bool contains =  boxHash.contains(id);
+    mutex.unlock();
 
+    return contains;
+}
