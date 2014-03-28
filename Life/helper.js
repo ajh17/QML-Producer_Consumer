@@ -1,4 +1,4 @@
-/*global Qt,Component,appWindow,Consumer*/
+/*global Qt,Component,appWindow,Consumer,consumer*/
 "use strict";
 
 function createBox() {
@@ -56,8 +56,8 @@ function destroyUponCollision(parentID) {
                     logString += "," + firstBox.y + ") have collided.\n";
                     console.log(logString);
 
-                    _consumer.consumeSlot(firstBox);
-                    _consumer.consumeSlot(secondBox);
+                    consumer.consumeSlot(firstBox);
+                    consumer.consumeSlot(secondBox);
                 }
             }
         }
