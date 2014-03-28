@@ -56,6 +56,10 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
 
 void Consumer::consumeSlot(const QVariant &obj)
 {
-    qDebug() << "Removing: " << m_main->getKeyFor(obj);
-    consume(m_main->getKeyFor(obj), this->thread()->currentThreadId());
+    if (m_main->getKeyFor(obj) != 0) {
+        consume(m_main->getKeyFor(obj), this->thread()->currentThreadId());
+    }
+    else {
+        qDebug() << "Box " << obj << "already removed.";
+    }
 }
