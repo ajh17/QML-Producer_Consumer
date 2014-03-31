@@ -21,7 +21,41 @@ Rectangle {
     signal testSignal();
     signal consumeSignal(var anObject);
 
-    // Quit Button {{{
+    // Consumer Text Box {{{1
+    Rectangle {
+        id: consumerTextBox
+        objectName: "consumerTextBox"
+        width: 75
+        height: 25
+        x: 5; y: 5; z: 100
+        border.width: 1
+        border.color: "#000"
+        color: "#fff"
+        Text {
+            anchors.centerIn: parent
+            text: "Consumer"
+            color: "#000"
+        }
+    }
+
+    // Collision Detection Box {{{1
+    Rectangle {
+        id: collisionTextBox
+        objectName: "collisionTextBox"
+        width: 125
+        height: 25
+        x: 370; y: 5; z: 100
+        border.width: 1
+        border.color: "#000"
+        color: "#fff"
+        Text {
+            anchors.centerIn: parent
+            text: "Collision Detected"
+            color: "#000"
+        }
+    }
+
+    // Quit Button {{{1
     Rectangle {
         width: 75
         height: 25
