@@ -2,7 +2,6 @@
 #define PRODUCER_H
 #include <QTimer>
 #include <QThread>
-#include <QQuickItem>
 #include "mainobject.h"
 
 class Producer : public QObject

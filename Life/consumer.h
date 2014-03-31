@@ -2,7 +2,6 @@
 #define CONSUMER_H
 #include <QTimer>
 #include <QThread>
-#include <QVariant>
 #include "mainobject.h"
 
 class Consumer : public QObject
@@ -20,5 +19,4 @@ private:
     MainObject *m_main;
     Qt::HANDLE m_threadID;
 };
-
 #endif
