@@ -8,9 +8,11 @@ MainObject::MainObject(QObject *obj, QObject *parent) : QObject(parent)
 
 void MainObject::insertBox(QVariant box)
 {
+    mutex.lock();
     boxHash.insert(id, box);
-    qDebug() << "\n+++>> INSERTED Hash(" << id <<  "," << this->getBox(id) << "\n";
+    qDebug() << "\n+++>> INSERTED Hash(" << id <<  "," << boxHash.value(id) << "\n";
     ++id;
+    mutex.unlock();
 }
 
 int MainObject::getKeyFor(QVariant box)
@@ -41,15 +43,6 @@ QVariant MainObject::removeBox(int id)
     mutex.unlock();
 
     return removedBox;
-}
-
-QVariant MainObject::getBox(int id)
-{
-    mutex.lock();
-    QVariant box = QVariant::fromValue(boxHash.value(id));
-    mutex.unlock();
-
-    return box;
 }
 
 int MainObject::hashSize()
