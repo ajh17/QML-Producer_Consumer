@@ -56,7 +56,6 @@ QVariant MainObject::removeBox(int id)
 
 int MainObject::hashSize()
 {
-    qDebug() << "hashsize: " << boxHash.size();
     return boxHash.size();
 }
 
