@@ -24,6 +24,15 @@ int MainObject::getKeyFor(QVariant box)
     return key;
 }
 
+QVariant MainObject::getBox(int id)
+{
+    mutex.lock();
+    QVariant box = QVariant::fromValue(boxHash.value(id));
+    mutex.unlock();
+
+    return box;
+}
+
 QList<int> MainObject::getKeys()
 {
     mutex.lock();
@@ -47,11 +56,7 @@ QVariant MainObject::removeBox(int id)
 
 int MainObject::hashSize()
 {
-    mutex.lock();
-    size_t size = boxHash.size();
-    mutex.unlock();
-
-    return size;
+    return boxHash.size();
 }
 
 bool MainObject::didFind(int id)

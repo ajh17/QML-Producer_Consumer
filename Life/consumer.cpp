@@ -7,7 +7,7 @@ Consumer::Consumer(QObject *obj, MainObject *main,
     m_obj = obj;
     m_main = main;
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
-    timer->start(2000);
+    timer->start(3000);
 }
 
 void Consumer::startConsuming()
@@ -18,37 +18,44 @@ void Consumer::startConsuming()
     }
     m_threadID = this->thread()->currentThreadId();
     qDebug() << "Consumer Thread ID: " << m_threadID;
-    int hashSize = m_main->hashSize();
-    int randomID = qrand() % hashSize;
 
-    // Check to make sure the random number ID is in the hash
-    // Otherwise, keep trying to generate random numbers.
-    // Might be slow.
-    while (! m_main->didFind(randomID)) {
-        randomID = qrand() % hashSize;
+    QList<int> keyList = m_main->getKeys();
+    int key_size = keyList.size();
+    if (key_size != 0) {
+        qDebug() << key_size;
+        int randomID = qrand() % key_size;
+
+        this->consume(keyList[randomID], m_threadID , false);
     }
-    this->consume(randomID, m_threadID);
 }
 
-void Consumer::consume(int id, Qt::HANDLE threadID)
+void Consumer::consume(int id, Qt::HANDLE threadID, bool collision)
 {
-    // Invalid ID.
-    if (id == 0) {
-        return;
-    }
-
-    // Print out which thread called the consumer
-    if (threadID == m_threadID) {
+    if (m_threadID == threadID) {
         qDebug() << "Called from Consumer thread: " << threadID;
     }
-    else if (threadID == m_obj->thread()->currentThreadId()) {
-        qDebug() << "Called from the GUI Thread: " << threadID;
+    else {
+        qDebug() << "Called from the GUI thread: " << threadID;
+    }
+    if (id == 0 || m_main->getBox(id).isNull()) {
+        return;
+    }
+    qDebug() << "ID: " << id;
+
+    QObject *collisionTextBox, *consumerTextBox;
+    if (collision) {
+        collisionTextBox = m_obj->findChild<QObject *>("collisionTextBox");
+        if (collisionTextBox) {
+            collisionTextBox->setProperty("color", "red");
+        }
     }
     else {
-        qDebug() << "Called from Avoider thread: " << threadID;
+        consumerTextBox = m_obj->findChild<QObject *>("consumerTextBox");
+        if (consumerTextBox) {
+            consumerTextBox->setProperty("color", "red");
+        }
     }
 
-    qDebug() << "ID: " << id;
     QVariant box = m_main->removeBox(id);
     QMetaObject::invokeMethod(m_obj, "destroyBox", Qt::QueuedConnection,
                               Q_ARG(QVariant, box));
@@ -57,7 +64,7 @@ void Consumer::consume(int id, Qt::HANDLE threadID)
 void Consumer::consumeSlot(const QVariant &obj)
 {
     if (m_main->getKeyFor(obj) != 0) {
-        consume(m_main->getKeyFor(obj), this->thread()->currentThreadId());
+        consume(m_main->getKeyFor(obj), this->thread()->currentThreadId(), true);
     }
     else {
         qDebug() << "Box " << obj << "already removed.";

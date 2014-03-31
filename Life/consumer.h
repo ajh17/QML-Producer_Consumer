@@ -12,11 +12,12 @@ public:
     QTimer *timer;
 public slots:
     void startConsuming();
-    void consume(int id, Qt::HANDLE threadID);
+    void consume(int id, Qt::HANDLE threadID, bool collision);
+    void flash(bool collision, QVariant color);
     Q_INVOKABLE void consumeSlot(const QVariant &obj);
 private:
     QObject *m_obj;
-    MainObject *m_main;
     Qt::HANDLE m_threadID;
+    MainObject *m_main;
 };
 #endif

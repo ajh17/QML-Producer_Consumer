@@ -53,7 +53,7 @@ void Avoider::checkForCollision()
                     boxesMap.insert(boxesItr1.key(), false);
                     boxesMap.insert(boxesItr2.key(), false);
 
-                    m_consumer->consume(id2, thread()->currentThreadId());
+                    m_consumer->consume(id2, thread()->currentThreadId(), true);
                 }
             }
             ++boxesItr2;
