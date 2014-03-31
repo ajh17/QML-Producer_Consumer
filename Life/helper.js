@@ -3,8 +3,8 @@
 
 function createBox() {
     var component = Qt.createComponent("qml/Life/Box.qml"),
-        xVal      = Math.floor(Math.random() * 420 + 1),
-        yVal      = Math.floor(Math.random() * 420 + 1),
+        xVal      = Math.floor(Math.random() * 420 + 6),
+        yVal      = Math.floor(Math.random() * 420 + 6),
         box;
 
     if (component.status === Component.Ready) {
@@ -64,7 +64,7 @@ function destroyUponCollision(parentID) {
 }
 
 function getNewVal(oldVal) {
-    var newVal = Math.floor(Math.random() * 420 + 1);
+    var newVal = Math.floor(Math.random() * 420 + 6);
     if (newVal !== oldVal) {
         return newVal;
     }
