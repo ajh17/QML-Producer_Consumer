@@ -2,7 +2,6 @@
 #define MAINOBJECT_H
 #include <QObject>
 #include <QDebug>
-#include <QVariant>
 #include <QMutex>
 
 class MainObject : public QObject
@@ -13,7 +12,6 @@ public:
     QHash<int, QVariant> boxHash;
 public slots:
     void insertBox(QVariant box);
-    void updateHash(int id, QVariant box);
     int getKeyFor(QVariant box);
     QList<int> getKeys();
     QVariant removeBox(int id);
@@ -26,4 +24,3 @@ private:
     int id;
 };
 #endif
-

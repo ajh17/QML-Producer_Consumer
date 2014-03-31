@@ -13,13 +13,6 @@ void MainObject::insertBox(QVariant box)
     ++id;
 }
 
-void MainObject::updateHash(int id, QVariant box)
-{
-    mutex.lock();
-    boxHash.insert(id, box);
-    mutex.unlock();
-}
-
 int MainObject::getKeyFor(QVariant box)
 {
     mutex.lock();
