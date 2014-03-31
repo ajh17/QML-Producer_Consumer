@@ -7,7 +7,7 @@ Consumer::Consumer(QObject *obj, MainObject *main,
     m_obj = obj;
     m_main = main;
     connect(timer, SIGNAL(timeout()), this, SLOT(startConsuming()));
-    timer->start(3000);
+    timer->start(2000);
 }
 
 void Consumer::startConsuming()
