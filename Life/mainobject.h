@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QDebug>
 #include <QMutex>
+#include <QQmlProperty>
 
 class MainObject : public QObject
 {
@@ -14,6 +15,7 @@ public slots:
     void insertBox(QVariant box);
     int getKeyFor(QVariant box);
     QList<int> getKeys();
+    QVariant getBox(int id);
     QVariant removeBox(int id);
     int hashSize();
     bool didFind(int id);
