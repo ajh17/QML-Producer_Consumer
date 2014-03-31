@@ -33,7 +33,7 @@ Rectangle {
         color: "#fff"
         Text {
             anchors.centerIn: parent
-            text: "Consumer"
+            text: qsTr("Consumer")
             color: "#000"
         }
     }
@@ -50,7 +50,7 @@ Rectangle {
         color: "#fff"
         Text {
             anchors.centerIn: parent
-            text: "Collision Detected"
+            text: qsTr("Collision Detected")
             color: "#000"
         }
     }
@@ -65,7 +65,7 @@ Rectangle {
         color: "#fff"
         Text {
             anchors.centerIn: parent
-            text: "Quit App"
+            text: qsTr("Quit App")
             color: "#000"
         }
         MouseArea {
