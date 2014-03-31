@@ -1,12 +1,29 @@
 #include <QtGui/QGuiApplication>
 #include <QQmlContext>
 #include <QQuickItem>
+#include <csignal>
 #include "qtquick2applicationviewer.h"
 #include "producer.h"
 #include "consumer.h"
 
+struct CleanExit {
+    CleanExit()
+    {
+        signal(SIGINT, &CleanExit::exitQt);
+        signal(SIGTERM, &CleanExit::exitQt);
+        signal(SIGABRT, &CleanExit::exitQt);
+    }
+
+    static void exitQt(int sig)
+    {
+        qDebug() << "Received signal" << sig;
+        QCoreApplication::exit(0);
+    }
+};
+
 int main(int argc, char *argv[])
 {
+    CleanExit cleanExit;
     QGuiApplication app(argc, argv);
     qDebug() << "GUI Thread ID: " << app.thread()->currentThreadId();
 
