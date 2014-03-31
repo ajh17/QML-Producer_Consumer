@@ -4,7 +4,6 @@
 #include <QQmlProperty>
 #include "consumer.h"
 
-/* For now, really basic */
 class Avoider : public QObject
 {
     Q_OBJECT
@@ -19,6 +18,4 @@ private:
     MainObject *m_main;
     Consumer *m_consumer;
 };
-
 #endif
-
