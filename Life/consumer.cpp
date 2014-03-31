@@ -18,10 +18,14 @@ void Consumer::startConsuming()
     }
     m_threadID = this->thread()->currentThreadId();
     qDebug() << "Consumer Thread ID: " << m_threadID;
-    int hashSize = m_main->hashSize();
-    if (hashSize != 0) {
-        int randomID = qrand() % hashSize + 1;
-        this->consume(randomID, m_threadID , false);
+
+    QList<int> keyList = m_main->getKeys();
+    int key_size = keyList.size();
+    if (key_size != 0) {
+        qDebug() << key_size;
+        int randomID = qrand() % key_size;
+
+        this->consume(keyList[randomID], m_threadID , false);
     }
 }
 

@@ -13,6 +13,7 @@ public:
 public slots:
     void startConsuming();
     void consume(int id, Qt::HANDLE threadID, bool collision);
+    void flash(bool collision, QVariant color);
     Q_INVOKABLE void consumeSlot(const QVariant &obj);
 private:
     QObject *m_obj;
