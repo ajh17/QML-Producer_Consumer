@@ -16,17 +16,23 @@ void Consumer::startConsuming()
         qDebug() << "Viewer was null.";
         return;
     }
-    qDebug() << "Consumer Thread ID: " << thread()->currentThreadId();
+    m_threadID = this->thread()->currentThreadId();
+    qDebug() << "Consumer Thread ID: " << m_threadID;
     int hashSize = m_main->hashSize();
     if (hashSize != 0) {
-        int randomID = qrand() % hashSize;
-        this->consume(randomID, false);
+        int randomID = qrand() % hashSize + 1;
+        this->consume(randomID, m_threadID , false);
     }
 }
 
-void Consumer::consume(int id, bool collision)
+void Consumer::consume(int id, Qt::HANDLE threadID, bool collision)
 {
-    // Invalid ID.
+    if (m_threadID == threadID) {
+        qDebug() << "Called from Consumer thread: " << threadID;
+    }
+    else {
+        qDebug() << "Called from the GUI thread: " << threadID;
+    }
     if (id == 0 || m_main->getBox(id).isNull()) {
         return;
     }
@@ -35,24 +41,14 @@ void Consumer::consume(int id, bool collision)
     QObject *collisionTextBox, *consumerTextBox;
     if (collision) {
         collisionTextBox = m_obj->findChild<QObject *>("collisionTextBox");
-        QVariant color = QQmlProperty::read(collisionTextBox, "color");
         if (collisionTextBox) {
-            if (color == "white")
-                collisionTextBox->setProperty("color", "red");
-            else {
-                collisionTextBox->setProperty("color", "white");
-            }
+            collisionTextBox->setProperty("color", "red");
         }
     }
     else {
         consumerTextBox = m_obj->findChild<QObject *>("consumerTextBox");
-        QVariant color = QQmlProperty::read(consumerTextBox, "color");
         if (consumerTextBox) {
-            if (color == "white")
-                consumerTextBox->setProperty("color", "red");
-            else {
-                consumerTextBox->setProperty("color", "white");
-            }
+            consumerTextBox->setProperty("color", "red");
         }
     }
 
@@ -64,7 +60,7 @@ void Consumer::consume(int id, bool collision)
 void Consumer::consumeSlot(const QVariant &obj)
 {
     if (m_main->getKeyFor(obj) != 0) {
-        consume(m_main->getKeyFor(obj), true);
+        consume(m_main->getKeyFor(obj), this->thread()->currentThreadId(), true);
     }
     else {
         qDebug() << "Box " << obj << "already removed.";
