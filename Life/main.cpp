@@ -27,13 +27,18 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     qDebug() << "GUI Thread ID: " << app.thread()->currentThreadId();
 
+    // Setup main object.
+    MainObject *mainObject = new MainObject();
+
+    // Start consumer thread
+    QThread *consumeThread = new QThread();
+    Consumer *consumer = new Consumer(mainObject);
+
     // Read QML File
     QQuickView viewer;
+    viewer.rootContext()->setContextProperty("Consumer", consumer);
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
-
-    // Setup main object.
-    MainObject *mainObject = new MainObject(item);
 
     // Start producer thread
     QThread *produceThread = new QThread();
@@ -41,12 +46,9 @@ int main(int argc, char *argv[])
     producer->moveToThread(produceThread);
     produceThread->start();
 
-    // Start consumer thread
-    QThread *consumeThread = new QThread();
-    Consumer *consumer = new Consumer(item, mainObject);
+    viewer.rootContext()->setContextProperty("consumer", consumer);
     consumer->moveToThread(consumeThread);
     consumeThread->start();
-    viewer.rootContext()->setContextProperty("consumer", consumer);
 
     // <-- Signals from QML to C++ -->
     QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app,
