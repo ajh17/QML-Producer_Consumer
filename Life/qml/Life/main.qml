@@ -15,20 +15,15 @@ Rectangle {
     }
 
     function consumedSlot(anObj) {
-        consumeColorAnimation.start()
+        seq1.stop()
+        seq1.start()
         Helper.destroyItem(anObj);
-        // consumeColorAnimation.stop()
     }
 
     function collisionSlot(anObj) {
-        collisionColorAnimation.start();
+        seq2.stop()
+        seq2.start()
         Helper.destroyItem(anObj);
-        // collisionColorAnimation.stop();
-    }
-
-    function clearSlot() {
-        clearColorConsumer.start();
-        clearColorCollision.start();
     }
 
     // Consumer Text Box {{{1
@@ -47,16 +42,23 @@ Rectangle {
             color: "#000"
         }
 
-        ColorAnimation on color {
-            id: consumeColorAnimation
+        SequentialAnimation {
+            id: seq1
             running: false
-            to: "red"; duration: 100
-        }
+            ColorAnimation {
+                id: consumeColorAnimation
+                target: consumerTextBox
+                property: "color"
+                to: "red"; duration: 100
+                // onStopped: clearColorConsumer.start()
+            }
 
-        ColorAnimation on color {
-            id: clearColorConsumer
-            running: false
-            to: "white"; duration: 100
+            ColorAnimation {
+                id: clearColorConsumer
+                target: consumerTextBox
+                property: "color"
+                to: "white"; duration: 5000
+            }
         }
     }
 
@@ -77,16 +79,22 @@ Rectangle {
             color: "#000"
         }
 
-        ColorAnimation on color {
-            id: collisionColorAnimation
+        SequentialAnimation {
+            id: seq2
             running: false
-            to: "red"; duration: 100
-        }
-
-        ColorAnimation on color {
-            id: clearColorCollision
-            running: false
-            to: "white"; duration: 100
+            ColorAnimation {
+                id: collisionColorAnimation
+                target: collisionTextBox
+                property: "color"
+                to: "red"; duration: 100
+                // onStopped: clearCollisionColor.start()
+            }
+            ColorAnimation {
+                id: clearCollisionColor
+                target: collisionTextBox
+                property: "color"
+                to: "white"; duration: 5000
+            }
         }
     }
 
