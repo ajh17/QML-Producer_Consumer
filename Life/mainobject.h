@@ -9,7 +9,7 @@ class MainObject : public QObject
 {
     Q_OBJECT
 public:
-    explicit MainObject(QObject *obj = 0, QObject *parent = 0);
+    explicit MainObject(QObject *parent = 0);
     QHash<int, QVariant> boxHash;
 public slots:
     void insertBox(QVariant box);
@@ -20,7 +20,6 @@ public slots:
     int hashSize();
     bool didFind(int id);
 private:
-    QObject *m_obj;
     QMutex mutex;
     int id;
 };

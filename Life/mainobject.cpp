@@ -1,8 +1,7 @@
 #include "mainobject.h"
 
-MainObject::MainObject(QObject *obj, QObject *parent) : QObject(parent)
+MainObject::MainObject(QObject *parent) : QObject(parent)
 {
-    m_obj = obj;
     id = 1;
 }
 
