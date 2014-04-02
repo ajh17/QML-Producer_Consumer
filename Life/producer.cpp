@@ -4,14 +4,11 @@ Producer::Producer(QObject *obj, MainObject *main,
                    QObject *parent) : QObject(parent)
 {
     timer = new QTimer(this);
-    timer2 = new QTimer(this);
     m_obj = obj;
     m_main = main;
 
     connect(timer, SIGNAL(timeout()), this, SLOT(produceTimer()));
-    connect(timer2, SIGNAL(timeout()), this, SLOT(startFlash()));
     timer->start(1000);
-    timer2->start(300);
 }
 
 void Producer::produceTimer()
@@ -32,18 +29,4 @@ void Producer::produceTimer()
         return;
     }
     m_main->insertBox(boxObject);
-}
-
-void Producer::startFlash()
-{
-    flash("white");
-}
-
-void Producer::flash(QVariant color)
-{
-    QObject *collisionText = m_obj->findChild<QObject *>("collisionTextBox");
-    QObject *consumerText = m_obj->findChild<QObject *>("consumerTextBox");
-
-    collisionText->setProperty("color", color);
-    consumerText->setProperty("color", color);
 }
