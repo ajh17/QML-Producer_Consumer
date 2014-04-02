@@ -15,8 +15,8 @@ public slots:
     void consume(int id, Qt::HANDLE threadID, bool collision);
     Q_INVOKABLE void consumeSlot(const QVariant &obj);
 signals:
-    void collisionSignal(QVariant &box);
-    void consumedSignal(QVariant &box);
+    void collisionSignal(QVariant box);
+    void consumedSignal(QVariant box);
 private:
     Qt::HANDLE m_threadID;
     MainObject *m_main;
