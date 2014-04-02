@@ -9,18 +9,17 @@ Rectangle {
         return box;
     }
 
-    function destroyBox(itemID) {
-        return Helper.destroyItem(itemID);
-    }
-
     function quit() {
         console.log("Quitting App!");
         Qt.quit();
     }
 
-    Connections {
-        target: Consumer
-        onConsumedSignal: console.log("!!!!!");
+    function consumedSlot(anObj) {
+        Helper.destroyItem(anObj, false);
+    }
+
+    function collisionSlot(anObj) {
+        Helper.destroyItem(anObj, true);
     }
 
     // Consumer Text Box {{{1
