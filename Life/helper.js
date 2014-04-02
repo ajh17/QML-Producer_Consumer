@@ -21,7 +21,7 @@ function createBox() {
 }
 
 function destroyItem(itemID) {
-    console.log("Destroyed " + itemID);
+    console.log("destroyed " + itemID);
     itemID.destroy();
 }
 
