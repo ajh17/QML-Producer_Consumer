@@ -60,8 +60,6 @@ int main(int argc, char *argv[])
     QObject::connect(consumer, SIGNAL(collisionSignal(QVariant)), item,
                     SLOT(collisionSlot(QVariant)));
 
-    QObject::connect(producer, SIGNAL(clearSignal()), item, SLOT(clearSlot()));
-
     viewer.setTitle("Life");
     viewer.setHeight(500);
     viewer.setWidth(500);
