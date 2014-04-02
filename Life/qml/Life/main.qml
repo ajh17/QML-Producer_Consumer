@@ -15,14 +15,12 @@ Rectangle {
     }
 
     function consumedSlot(anObj) {
-        seq1.stop()
-        seq1.start()
+        seq1.restart()
         Helper.destroyItem(anObj);
     }
 
     function collisionSlot(anObj) {
-        seq2.stop()
-        seq2.start()
+        seq2.restart()
         Helper.destroyItem(anObj);
     }
 
@@ -30,9 +28,9 @@ Rectangle {
     Rectangle {
         id: consumerTextBox
         objectName: "consumerTextBox"
-        width: 75
+        width: 110
         height: 25
-        x: 5; y: 5; z: 100
+        x: 10; y: 5; z: 100
         border.width: 1
         border.color: "#000"
         color: "white"
@@ -100,7 +98,7 @@ Rectangle {
 
     // Quit Button {{{1
     Rectangle {
-        width: 75
+        width: 150
         height: 25
         x: 200; y: 470; z: 100
         border.width: 1
