@@ -1,16 +1,16 @@
 import QtQuick 2.0
-import "/Users/ajh/Developer/Cpp/QML/Life/Life/helper.js" as Script
+import "/Users/ajh/Developer/Cpp/QML/Life/Life/helper.js" as Helper
 
 Rectangle {
     id: appWindow
 
     function callCreate() {
-        var box = Script.createBox();
+        var box = Helper.createBox();
         return box;
     }
 
     function destroyBox(itemID) {
-        return Script.destroyItem(itemID);
+        return Helper.destroyItem(itemID);
     }
 
     function quit() {
@@ -18,8 +18,10 @@ Rectangle {
         Qt.quit();
     }
 
-    signal testSignal();
-    signal consumeSignal(var anObject);
+    Connections {
+        target: Consumer
+        onConsumedSignal: console.log("!!!!!");
+    }
 
     // Consumer Text Box {{{1
     Rectangle {
