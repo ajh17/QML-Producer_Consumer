@@ -36,7 +36,6 @@ int main(int argc, char *argv[])
 
     // Read QML File
     QQuickView viewer;
-    viewer.rootContext()->setContextProperty("Consumer", consumer);
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
 
@@ -53,6 +52,12 @@ int main(int argc, char *argv[])
     // <-- Signals from QML to C++ -->
     QObject::connect((QObject *)viewer.engine(), SIGNAL(quit()), &app,
                      SLOT(quit()));
+
+    QObject::connect(consumer, SIGNAL(consumedSignal(QVariant)), item,
+                     SLOT(consumedSlot(QVariant)));
+
+    QObject::connect(consumer, SIGNAL(collisionSignal(QVariant)), item,
+                    SLOT(collisionSlot(QVariant)));
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
