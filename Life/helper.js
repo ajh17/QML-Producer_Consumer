@@ -20,9 +20,14 @@ function createBox() {
     return 2;
 }
 
-function destroyItem(itemID) {
-    console.log("Destroyed " + itemID);
-    itemID.destroy();
+function destroyItem(itemID, collision) {
+    if (collision) {
+        console.log("destroyed " + itemID);
+        itemID.destroy();
+    } else {
+        console.log("destroyed " + itemID);
+        itemID.destroy();
+    }
 }
 
 // Destroys boxes on contact.
