@@ -15,11 +15,20 @@ Rectangle {
     }
 
     function consumedSlot(anObj) {
-        Helper.destroyItem(anObj, false);
+        consumeColorAnimation.start()
+        Helper.destroyItem(anObj);
+        // consumeColorAnimation.stop()
     }
 
     function collisionSlot(anObj) {
-        Helper.destroyItem(anObj, true);
+        collisionColorAnimation.start();
+        Helper.destroyItem(anObj);
+        // collisionColorAnimation.stop();
+    }
+
+    function clearSlot() {
+        clearColorConsumer.start();
+        clearColorCollision.start();
     }
 
     // Consumer Text Box {{{1
@@ -31,11 +40,23 @@ Rectangle {
         x: 5; y: 5; z: 100
         border.width: 1
         border.color: "#000"
-        color: "#fff"
+        color: "white"
         Text {
             anchors.centerIn: parent
             text: qsTr("Consumer")
             color: "#000"
+        }
+
+        ColorAnimation on color {
+            id: consumeColorAnimation
+            running: false
+            to: "red"; duration: 100
+        }
+
+        ColorAnimation on color {
+            id: clearColorConsumer
+            running: false
+            to: "white"; duration: 100
         }
     }
 
@@ -48,11 +69,24 @@ Rectangle {
         x: 370; y: 5; z: 100
         border.width: 1
         border.color: "#000"
-        color: "#fff"
+        color: "white"
         Text {
+            id: collisionText
             anchors.centerIn: parent
-            text: qsTr("Collision Detected")
+            text: qsTr("Collision Detected: ")
             color: "#000"
+        }
+
+        ColorAnimation on color {
+            id: collisionColorAnimation
+            running: false
+            to: "red"; duration: 100
+        }
+
+        ColorAnimation on color {
+            id: clearColorCollision
+            running: false
+            to: "white"; duration: 100
         }
     }
 
