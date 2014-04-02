@@ -64,9 +64,9 @@ Rectangle {
     Rectangle {
         id: collisionTextBox
         objectName: "collisionTextBox"
-        width: 125
+        width: 135
         height: 25
-        x: 370; y: 5; z: 100
+        x: 360; y: 5; z: 100
         border.width: 1
         border.color: "#000"
         color: "white"
