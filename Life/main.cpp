@@ -27,14 +27,14 @@ int main(int argc, char *argv[])
     CleanExit cleanExit;
     QGuiApplication app(argc, argv);
 
-    // Load translator
-    static QTranslator translator;
-    if (translator.load("languages/lang_fr_FR", "/Users/ajh/Developer/Cpp/QML/Life/Life/")) {
-        app.installTranslator(&translator);
-    }
-    else {
-        qDebug() << "Translation error";
-    }
+    // // Load translator
+    // static QTranslator translator;
+    // if (translator.load("languages/lang_fr_FR", "/Users/ajh/Developer/Cpp/QML/Life/Life/")) {
+    //     app.installTranslator(&translator);
+    // }
+    // else {
+    //     qDebug() << "Translation error";
+    // }
 
     qDebug() << "GUI Thread ID: " << app.thread()->currentThreadId();
 

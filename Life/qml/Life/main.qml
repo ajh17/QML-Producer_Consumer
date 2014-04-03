@@ -24,13 +24,32 @@ Rectangle {
         Helper.destroyItem(anObj);
     }
 
+    // Switch Translation Box {{{1
+    Rectangle {
+        id: langSwitcher
+        objectName: "langSwitcher"
+        width: 175
+        height: 25
+        x: 135; y: 5; z: 100
+        border.width: 1; border.color: "#000"
+        color: "white"
+        Text {
+            anchors.centerIn: parent
+            text: "Switch to French"
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: console.log("hello")
+        }
+    }
+    // }}}2
     // Consumer Text Box {{{1
     Rectangle {
         id: consumerTextBox
         objectName: "consumerTextBox"
-        width: 110
+        width: 75
         height: 25
-        x: 10; y: 5; z: 100
+        x: 5; y: 5; z: 100
         border.width: 1
         border.color: "#000"
         color: "white"
@@ -98,7 +117,7 @@ Rectangle {
 
     // Quit Button {{{1
     Rectangle {
-        width: 150
+        width: 75
         height: 25
         x: 200; y: 470; z: 100
         border.width: 1
