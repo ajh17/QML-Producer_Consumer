@@ -20,11 +20,12 @@ void TranslationObject::selectLanguage(QString lang)
             qDebug() << "Loaded french translation";
         }
         else {
-            qDebug() << "French translation error";
+            qDebug() << "Error loading french translation";
         }
     }
     else {
         qApp->removeTranslator(m_translator);
+        qDebug() << "Switched to English translation";
     }
     emit languageChanged();
 }
