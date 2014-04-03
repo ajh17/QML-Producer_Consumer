@@ -7,10 +7,10 @@ Rectangle {
     signal buttonClicked()
 
     width: 120
-    height: 30
+    height: 25
     color: mouseArea.pressed ? "lightgray" : "white"
-    radius: 4
-    border.width: 1; border.color: "gray"
+    radius: 5
+    border.width: 1; border.color: "black"
 
     MouseArea {
         id: mouseArea

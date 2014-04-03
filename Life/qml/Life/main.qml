@@ -28,7 +28,8 @@ Rectangle {
 
     // Switch Translation Buttons {{{1
     Row {
-        x: 100
+        x: 100; y: 5
+        spacing: 2
         Button { lang: "English"; onButtonClicked: translation.selectLanguage("en") }
         Button { lang: "French"; onButtonClicked: translation.selectLanguage("fr") }
     }
