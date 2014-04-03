@@ -1,0 +1,51 @@
+{
+    "consumer.cpp" : {
+        "alternate": "consumer.h",
+        "command": "consumer"
+    },
+    "consumer.h" : {
+        "alternate": "consumer.cpp",
+        "command": "consumeheader"
+    },
+    "producer.cpp" : {
+        "alternate": "producer.h",
+        "command": "producer"
+    },
+    "producer.h" : {
+        "alternate": "producer.cpp",
+        "command": "produceheader"
+    },
+    "mainobject.cpp" : {
+        "alternate": "mainobject.h",
+        "command": "object"
+    },
+    "mainobject.h" : {
+        "alternate": "mainobject.cpp",
+        "command": "objectheader"
+    },
+    "translationobject.cpp" : {
+        "alternate": "translationobject.h",
+        "command": "translate"
+    },
+    "translationobject.h" : {
+        "alternate": "translationobject.cpp",
+        "command": "translateheader"
+    },
+    "avoider.cpp" : {
+        "alternate": "avoider.h",
+        "command": "avoider"
+    },
+    "avoider.h" : {
+        "alternate": "avoider.cpp",
+        "command": "avoiderheader"
+    },
+    "main.cpp" : {
+        "command": "main"
+    },
+    "qml/Life/main.qml" : {
+        "alternate": "qml/Life/Box.qml"
+    },
+    "qml/Life/Box.qml" : {
+        "alternate": "qml/Life/main.qml"
+    }
+}
