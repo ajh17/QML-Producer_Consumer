@@ -4,6 +4,8 @@ import "/Users/ajh/Developer/Cpp/QML/Life/Life/helper.js" as Helper
 Rectangle {
     id: appWindow
 
+    signal switchTranslation();
+
     function callCreate() {
         var box = Helper.createBox();
         return box;
@@ -24,23 +26,11 @@ Rectangle {
         Helper.destroyItem(anObj);
     }
 
-    // Switch Translation Box {{{1
-    Rectangle {
-        id: langSwitcher
-        objectName: "langSwitcher"
-        width: 175
-        height: 25
-        x: 135; y: 5; z: 100
-        border.width: 1; border.color: "#000"
-        color: "white"
-        Text {
-            anchors.centerIn: parent
-            text: "Switch to French"
-        }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: console.log("hello")
-        }
+    // Switch Translation Buttons {{{1
+    Row {
+        x: 100
+        Button { lang: "English"; onButtonClicked: translation.selectLanguage("en") }
+        Button { lang: "French"; onButtonClicked: translation.selectLanguage("fr") }
     }
     // }}}2
     // Consumer Text Box {{{1
