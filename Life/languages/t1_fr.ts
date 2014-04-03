@@ -7,12 +7,12 @@
         <location filename="qml/Life/main.qml" line="41"/>
         <source>Consumer</source>
         <translatorcomment>Consumer</translatorcomment>
-        <translation>consommateur</translation>
+        <translation type="unfinished">Consommateur</translation>
     </message>
     <message>
         <location filename="qml/Life/main.qml" line="78"/>
         <source>Collision Detected: </source>
-        <translation>colisión detectada:</translation>
+        <translation>Colisión Detectada:</translation>
     </message>
     <message>
         <location filename="qml/Life/main.qml" line="111"/>
