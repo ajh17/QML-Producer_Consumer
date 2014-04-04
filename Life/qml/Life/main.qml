@@ -28,7 +28,7 @@ Rectangle {
 
     // Switch Translation Buttons {{{1
     Row {
-        x: 100; y: 5
+        x: 135; y: 5
         spacing: 2
         Button { lang: "English"; onButtonClicked: translation.selectLanguage("en") }
         Button { lang: "French"; onButtonClicked: translation.selectLanguage("fr") }
@@ -38,9 +38,9 @@ Rectangle {
     Rectangle {
         id: consumerTextBox
         objectName: "consumerTextBox"
-        width: 75
+        width: 110
         height: 25
-        x: 5; y: 5; z: 100
+        x: 2; y: 5; z: 100
         border.width: 1
         border.color: "#000"
         color: "white"
@@ -108,9 +108,9 @@ Rectangle {
 
     // Quit Button {{{1
     Rectangle {
-        width: 75
+        width: 150
         height: 25
-        x: 200; y: 470; z: 100
+        x: 160; y: 470; z: 100
         border.width: 1
         border.color: "#000"
         color: "#fff"

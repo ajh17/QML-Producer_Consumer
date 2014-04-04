@@ -6,7 +6,7 @@ Rectangle {
 
     signal buttonClicked()
 
-    width: 120
+    width: 100
     height: 25
     color: mouseArea.pressed ? "lightgray" : "white"
     radius: 5
