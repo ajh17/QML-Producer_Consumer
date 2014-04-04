@@ -1,7 +1,6 @@
 #include "translationobject.h"
 
-TranslationObject::TranslationObject(QObject *parent) :
-    QObject(parent)
+TranslationObject::TranslationObject()
 {
     m_translator = new QTranslator(this);
 }
