@@ -4,6 +4,8 @@ import "/Users/ajh/Developer/Cpp/QML/Life/Life/helper.js" as Helper
 Rectangle {
     id: appWindow
 
+    signal switchTranslation();
+
     function callCreate() {
         var box = Helper.createBox();
         return box;
@@ -15,30 +17,36 @@ Rectangle {
     }
 
     function consumedSlot(anObj) {
-        seq1.stop()
-        seq1.start()
+        seq1.restart()
         Helper.destroyItem(anObj);
     }
 
     function collisionSlot(anObj) {
-        seq2.stop()
-        seq2.start()
+        seq2.restart()
         Helper.destroyItem(anObj);
     }
 
+    // Switch Translation Buttons {{{1
+    Row {
+        x: 135; y: 5
+        spacing: 2
+        Button { lang: "English"; onButtonClicked: translation.selectLanguage("en") }
+        Button { lang: "French"; onButtonClicked: translation.selectLanguage("fr") }
+    }
+    // }}}2
     // Consumer Text Box {{{1
     Rectangle {
         id: consumerTextBox
         objectName: "consumerTextBox"
-        width: 75
+        width: 110
         height: 25
-        x: 5; y: 5; z: 100
+        x: 2; y: 5; z: 100
         border.width: 1
         border.color: "#000"
         color: "white"
         Text {
             anchors.centerIn: parent
-            text: qsTr("Consumer")
+            text: qsTr("Consumer") + translation.emptyString
             color: "#000"
         }
 
@@ -75,7 +83,7 @@ Rectangle {
         Text {
             id: collisionText
             anchors.centerIn: parent
-            text: qsTr("Collision Detected: ")
+            text: qsTr("Collision Detected: ") + translation.emptyString
             color: "#000"
         }
 
@@ -100,15 +108,15 @@ Rectangle {
 
     // Quit Button {{{1
     Rectangle {
-        width: 75
+        width: 150
         height: 25
-        x: 200; y: 470; z: 100
+        x: 160; y: 470; z: 100
         border.width: 1
         border.color: "#000"
         color: "#fff"
         Text {
             anchors.centerIn: parent
-            text: qsTr("Quit App")
+            text: qsTr("Quit App") + translation.emptyString
             color: "#000"
         }
         MouseArea {

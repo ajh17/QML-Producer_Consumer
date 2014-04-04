@@ -2,9 +2,11 @@
 #include <QQmlContext>
 #include <QQuickItem>
 #include <csignal>
+#include <QTranslator>
 #include "qtquick2applicationviewer.h"
 #include "producer.h"
 #include "consumer.h"
+#include "translationobject.h"
 
 struct CleanExit {
     CleanExit()
@@ -25,6 +27,7 @@ int main(int argc, char *argv[])
 {
     CleanExit cleanExit;
     QGuiApplication app(argc, argv);
+
     qDebug() << "GUI Thread ID: " << app.thread()->currentThreadId();
 
     // Setup main object.
@@ -36,7 +39,9 @@ int main(int argc, char *argv[])
 
     // Read QML File
     QQuickView viewer;
+    TranslationObject translationObject;
     viewer.rootContext()->setContextProperty("Consumer", consumer);
+    viewer.rootContext()->setContextProperty("translation", &translationObject);
     viewer.setSource(QUrl::fromLocalFile("../../../../Life/qml/Life/main.qml"));
     QObject *item = viewer.rootObject();
 
@@ -58,7 +63,7 @@ int main(int argc, char *argv[])
                      SLOT(consumedSlot(QVariant)));
 
     QObject::connect(consumer, SIGNAL(collisionSignal(QVariant)), item,
-                    SLOT(collisionSlot(QVariant)));
+                     SLOT(collisionSlot(QVariant)));
 
     viewer.setTitle("Life");
     viewer.setHeight(500);
